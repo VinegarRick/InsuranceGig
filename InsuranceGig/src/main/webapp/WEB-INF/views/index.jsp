@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <%@ page isELIgnored="false" %> 
+ 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Insurance - Press</title>
+    <title>Auto Insurance Gig</title>
     <link rel="shortcut icon" href="images/favicon.png" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -53,27 +56,21 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                         <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand" href="index.html">
-                        Insurance<span>Press</span>
+                    <a class="navbar-brand" href="index">
+                        Auto Insurance<span>Gig</span>
                     </a>
                     <p>Call Us Now <b>+215 (362) 4579</b></p>
                 </div>
                 <div class="collapse navbar-collapse navbar-main-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="home">Home</a>
                         </li>
                         <li>
-                            <a href="blog.html">Blog</a>
+                            <a href="contact-us">Contact</a>
                         </li>
                         <li>
-                            <a href="blog-details.html">Blog Details</a>
-                        </li>
-                        <li>
-                            <a href="contact-us.html">Contact</a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn-default">Buy Pro Version</a>
+                            <a href="insurance" class="btn-default">Buy Auto Insurance</a>
                         </li>
                     </ul>
                 </div>
@@ -88,9 +85,9 @@
                     <img src="images/slider-img.jpg" />
                     <div class="slide-info">
                         <div class="slide-con">
-                            <b>Healthcare</b>
-                            <h3>Health Insurance</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit fringilla ligula, nec congue leo pharetra in.</p>
+                            <b>Get Protected</b>
+                            <h3>Automobile Insurance</h3>
+                            <p>Californians save an average of $905 with Auto Insurance Gig</p>
                             <a href="#" class="ti-arrow-right"></a>
                         </div>
                     </div>
@@ -99,9 +96,9 @@
                     <img src="images/slider-img1.jpg" />
                     <div class="slide-info">
                         <div class="slide-con">
-                            <b>Lifecare</b>
-                            <h3>Life Insurance</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit fringilla ligula, nec congue leo pharetra in.</p>
+                            <b>Claims</b>
+                            <h3>24/7 Claims</h3>
+                            <p>You can file a claim 24 hours a day, seven days a week with Auto Insurance Gig.</p>
                             <a href="#" class="ti-arrow-right"></a>
                         </div>
                     </div>
@@ -110,9 +107,20 @@
                     <img src="images/slider-img2.jpg" />
                     <div class="slide-info">
                         <div class="slide-con">
-                            <b>Healthcare</b>
-                            <h3>Travel Insurance</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit fringilla ligula, nec congue leo pharetra in.</p>
+                            <b>Repairs</b>
+                            <h3>Guaranteed Repairs</h3>
+                            <p>We guarantee any repairs completed by a Auto Insurance Gig authorized repair shop for as long as you own the car!.</p>
+                            <a href="#" class="ti-arrow-right"></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <img src="images/slider-img3.jpg" />
+                    <div class="slide-info">
+                        <div class="slide-con">
+                            <b>Assistance</b>
+                            <h3>24/7 Roadside Assistance</h3>
+                            <p>You can add optional coverage that will dispatch a roadside service professional to help get you back on the road.</p>
                             <a href="#" class="ti-arrow-right"></a>
                         </div>
                     </div>
@@ -123,23 +131,23 @@
             <div class="row">
                 <section class="col-sm-7 col-md-8 col-lg-8">
                     <div class="intro">
-                        <h2>Welcome to Insurance press</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent orci nisi, porta sed diam id, venenatis dignissim urna. Duis sit amet eros a sem viverra mollis nec eu sem. Quisque rutporta sed diam id, venenatis dignissim urna. Duis sit amet eros a sem viver uisque rurum euismod fermentum.</p>
+                        <h2>Welcome to Auto Insurance Gig</h2>
+                        <p>When it comes to choosing an insurance company, Auto Insurance Gig knows you want the lowest price possible. But you also want the appropriate amount of coverage to protect your family and property. Why should you have to sacrifice one for the other? We believe in offering the best of both worlds. Low rates come with excellent coverage, and our local agents are there to create your ideal insurance policy. That's what sets us apart from our competitors. And, that's what makes us the obvious choice when it comes to insurance.</p>
                         <ul class="row">
                             <li class="col-sm-4">
                                 <i class="fa fa-life-ring"></i>
-                                <h3>27x7 Support</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                                <h3>Service and Support </h3>
+                                <p>Protecting our customers and their property is a responsibility we take very seriously, and we're committed to providing the best service and protection for everyone we insure.</p>
                             </li>
                             <li class="col-sm-4">
                                 <i class="ti-marker-alt"></i>
                                 <h3>Easy Claim system</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                                <p>You can file a claim 24 hours a day, seven days a week. Just call our claims hotline at (800) 888-8888 to get back on the road fast.</p>
                             </li>
                             <li class="col-sm-4">
                                 <i class="ti-email"></i>
                                 <h3>Get Started with us</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                                <p>Shopping for car insurance is simple because we make it easy to understand with coverages to meet everyone's needs at affordable rates.</p>
                             </li>
                         </ul>
                     </div>
@@ -160,7 +168,7 @@
                             <div class="form-select">
                                 <span></span>
                                 <select>
-                                    <option>Product</option>
+                                    <option>Plan</option>
                                 </select>
                             </div>
                             <div>
@@ -174,91 +182,7 @@
                 </section>
             </div>
         </div>
-        <section class="product-tab">
-            <div class="container">
-                <div class="row">
-                    <div id="parentVerticalTab">
-                        <h2>Products</h2>
-                        <ul class="resp-tabs-list hor_1 col-sm-3 col-md-3 col-lg-3">
-                            <li><i class="ti-home"></i> House Insurance</li>
-                            <li><i class="fa fa-plane"></i> Travel Insurance</li>
-                            <li><i class="ti-heart-broken"></i> Life Insurance</li>
-                            <li><i class="ti-car"></i> Car Insurance</li>
-                        </ul>
-                        <div class="col-sm-5 col-md-5 col-lg-5 resp-tabs-container hor_1">
-                            <div>
-                                <div class="prod-tab-content">
-                                    <h4>
-                                        <span class="prod-cion"><i class="ti-home"></i></span>
-                                        House Insurance
-                                    </h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna, euismod ut ornare non, volutpat vel tortor. Integer</p>
-                                    <p>et placerat suscipit. Sed sodales scelerisque commodo. Nam porta cursus lectus. </p>
-                                    <p class="tel">
-                                        <i class="fa fa-phone"></i> +123 456 7890 <span>Toll Free</span>
-                                    </p>
-                                    <p>
-                                        <a class="btn-default" href="product-houseinsurance.html">Get Free Quote</a>
-                                    </p>
-                                </div>
-                                <img src="images/product-img.jpg" alt="" class="img-responsive" />
-                            </div>
-                            <div>
-                                <div class="prod-tab-content">
-                                    <h4>
-                                        <span class="prod-cion"><i class="fa fa-plane"></i></span>
-                                        Travel Insurance
-                                    </h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna, euismod ut ornare non, volutpat vel tortor. Integer</p>
-                                    <p>et placerat suscipit. Sed sodales scelerisque commodo. Nam porta cursus lectus. </p>
-                                    <p class="tel">
-                                        <i class="fa fa-phone"></i> +123 456 7890 <span>Toll Free</span>
-                                    </p>
-                                    <p>
-                                        <a class="btn-default" href="#">Get Free Quote</a>
-                                    </p>
-                                </div>
-                                <img src="images/1.jpg" alt="" class="img-responsive" />
-                            </div>
-                            <div>
-                                <div class="prod-tab-content">
-                                    <h4>
-                                        <span class="prod-cion"><i class="ti-heart-broken"></i></span>
-                                        Life Insurance
-                                    </h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna, euismod ut ornare non, volutpat vel tortor. Integer</p>
-                                    <p>et placerat suscipit. Sed sodales scelerisque commodo. Nam porta cursus lectus. </p>
-                                    <p class="tel">
-                                        <i class="fa fa-phone"></i> +123 456 7890 <span>Toll Free</span>
-                                    </p>
-                                    <p>
-                                        <a class="btn-default" href="#">Get Free Quote</a>
-                                    </p>
-                                </div>
-                                <img src="images/3.jpg" alt="" class="img-responsive" />
-                            </div>
-                            <div>
-                                <div class="prod-tab-content">
-                                    <h4>
-                                        <span class="prod-cion"><i class="ti-car"></i></span>
-                                        Car Insurance
-                                    </h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna, euismod ut ornare non, volutpat vel tortor. Integer</p>
-                                    <p>et placerat suscipit. Sed sodales scelerisque commodo. Nam porta cursus lectus. </p>
-                                    <p class="tel">
-                                        <i class="fa fa-phone"></i> +123 456 7890 <span>Toll Free</span>
-                                    </p>
-                                    <p>
-                                        <a class="btn-default" href="#">Get Free Quote</a>
-                                    </p>
-                                </div>
-                                <img src="images/2.jpg" alt="" class="img-responsive" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
         <section class="services">
             <h2 class="text-center">Our Best Services</h2>
             <div class="container">
@@ -266,42 +190,42 @@
                     <div class="col-sm-3 services-dtl">
                         <span class="fa fa-life-bouy"></span>
                         <h3>24x7 Support</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                        <p>Our dedicated support team is available around the clock</p>
                     </div>
                     <div class="col-sm-3 services-dtl">
                         <span class="ti-pencil"></span>
                         <h3>Easy Claim System</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                        <p>Our hassle-free claims process makes it easy for you</p>
                     </div>
                     <div class="col-sm-3 services-dtl">
                         <span class="ti-email"></span>
                         <h3>Get Started With us</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                        <p>Begin your journey with us to discover a new world of insurance</p>
                     </div>
                     <div class="col-sm-3 services-dtl">
                         <span class="fa fa-money"></span>
                         <h3>Easy Installments</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                        <p>Choose flexible payment options with our easy installment plans for your insurance premiums</p>
                     </div>
                     <div class="col-sm-3 services-dtl">
                         <span class="ti-wallet"></span>
-                        <h3>Lorem Ipsum</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                        <h3>Cost-Efficient Plans</h3>
+                        <p>Discover our cost-efficient insurance plans that provide maximum coverage at affordable rates</p>
                     </div>
                     <div class="col-sm-3 services-dtl">
                         <span class="fa fa-laptop"></span>
                         <h3>Online Account</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                        <p>Access your insurance account online for convenient management and updates</p>
                     </div>
                     <div class="col-sm-3 services-dtl">
                         <span class="ti-lock"></span>
                         <h3>Strongly Secure</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                        <p>Your security is our top priority, and we maintain strong measures to protect your information</p>
                     </div>
                     <div class="col-sm-3 services-dtl">
                         <span class="ti-book"></span>
                         <h3>Understandable Terms</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                        <p>We provide clear and understandable terms, so you know exactly what you're getting</p>
                     </div>
                 </div>
             </div>
@@ -347,7 +271,7 @@
                                 <div class="clearfix testimonial-con" id="testimonial-tab3">
                                     <h3>Victoria<br /><span>CEO</span></h3>
                                     <i class="fa fa-quote-left left-quote"></i>
-                                    <p class="col-sm-offset-1 col-sm-10">Vivamus faucibus magna vitae purus blandit, rutrum aliquam turpis bibendum. Ut sit amet sapien dolor. Integer eget orci id leo consectetur iaculis ut vitae neque. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                                    <p class="col-sm-offset-1 col-sm-10">Cruising through the road of life, we steer towards a future where your safety and dreams intersect. At our auto insurance company, we're dedicated to empowering your journey, ensuring that every mile traveled is a step closer to your aspirations. Together, let's embrace the road ahead with the confidence that your path is secure in our hands.</p>
                                     <i class="fa fa-quote-right right-quote"></i>
                                 </div>
                                 <div class="clearfix testimonial-con" id="testimonial-tab4">
@@ -368,57 +292,7 @@
                 </div>
             </div>
         </section>
-        <section class="recent-news">
-            <h2 class="text-center">Recent News</h2>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-md-3">
-                        <div class="news-sec-box">
-                            <span class="ti-pencil"></span>
-                            <h3><a href="#">Free Sound Effects for Games, Apps & UI</a></h3>
-                            <p>24 Dec 2015</p>
-                            <div class="news-by">
-                                <a href="#"><img src="images/people-03.jpg" /></a>
-                                <a href="#">By Linda</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <div class="news-sec-box">
-                            <span class="ti-image"></span>
-                            <h3><a href="#">Free Sound Effects for Games, Apps & UI</a></h3>
-                            <p>24 Dec 2015</p>
-                            <div class="news-by">
-                                <a href="#"><img src="images/people-03.jpg" /></a>
-                                <a href="#">By Linda</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <div class="news-sec-box">
-                            <span class="ti-comments"></span>
-                            <h3><a href="#">Free Sound Effects for Games, Apps & UI</a></h3>
-                            <p>24 Dec 2015</p>
-                            <div class="news-by">
-                                <a href="#"><img src="images/people-03.jpg" /></a>
-                                <a href="#">By Linda</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <div class="news-sec-box">
-                            <span class="ti-control-play"></span>
-                            <h3><a href="#">Free Sound Effects for Games, Apps & UI</a></h3>
-                            <p>24 Dec 2015</p>
-                            <div class="news-by">
-                                <a href="#"><img src="images/people-03.jpg" /></a>
-                                <a href="#">By Linda</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+ 
         <section class="partners">
             <div class="container">
                 <div class="row">
@@ -527,13 +401,11 @@
             <div class="row">
                 <div class="col-md-8 col-lg-8">
                     <ul class="footer-nav">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index">Home</a></li>
                         <li><a href="#">About Us</a></li>
-                        <li><a href="blog.html">Blog</a></li>
                         <li><a href="#">Compnies represented</a></li>
-                        <li><a href="contact-us.html">Contact us</a></li>
+                        <li><a href="contact-us">Contact us</a></li>
                         <li><a href="#">Services</a></li>
-                        <li><a href="#">Products</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 col-lg-2 col-md-offset-2 col-lg-offset-2">

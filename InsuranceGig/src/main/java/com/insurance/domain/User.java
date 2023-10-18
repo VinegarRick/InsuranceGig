@@ -30,6 +30,8 @@ public class User {
 	
 	private String customerMobile;
 	
+	private Integer driverId;
+	
 		
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="user_role")
@@ -83,5 +85,27 @@ public class User {
 	public User() {
 		super();
 	}
+
+
+	public String getCustomerMobile() {
+		return customerMobile;
+	}
+
+
+	public void setCustomerMobile(String customerMobile) {
+		this.customerMobile = customerMobile;
+	}
+
+
+	public Integer getDriverId() {
+		return driverId;
+	}
+
+
+	public void setDriverId(Integer driverId) {
+		this.driverId = driverId;
+	}
+	
+	
 	
 }

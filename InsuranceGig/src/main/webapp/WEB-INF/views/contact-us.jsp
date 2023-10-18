@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <%@ page isELIgnored="false" %> 
+ 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Insurance - Press</title>
+    <title>Insurance Gig</title>
     <link rel="shortcut icon" href="images/favicon.png" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -50,27 +53,21 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                         <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand" href="index.html">
-                        Insurance<span>Press</span>
+                    <a class="navbar-brand" href="home">
+                        Insurance<span>Gig</span>
                     </a>
                     <p>Call Us Now <b>+215 (362) 4579</b></p>
                 </div>
                 <div class="collapse navbar-collapse navbar-main-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="home">Home</a>
                         </li>
                         <li>
-                            <a href="blog.html">Blog</a>
+                            <a href="contact-us">Contact</a>
                         </li>
                         <li>
-                            <a href="blog-details.html">Blog Details</a>
-                        </li>
-                        <li>
-                            <a href="contact-us.html">Contact</a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn-default">Buy Pro Version</a>
+                            <a href="#" class="btn-default">Buy Auto Insurance</a>
                         </li>
                     </ul>
                 </div>
@@ -83,7 +80,7 @@
             <div class="container">
                 <h2>Contact Us</h2>
                 <ul>
-                    <li><a href="index.html">Home</a> ></li>
+                    <li><a href="home">Home</a> ></li>
                     <li><a href="#">Contact Us</a></li>
                 </ul>
             </div>
@@ -154,7 +151,7 @@
         <div class="container">
             <div class="row contact-sec">
                 <div class="col-md-5 col-lg-5">
-                    <h2>Insurance<span>Press</span></h2>
+                    <h2>Insurance<span>Gig</span></h2>
                     <div class="row">
                         <div class="col-sm-6">
                             <p>E104 Dharti -2 , Nr Silverstar Mall Chandlodia - Ahmedabad
@@ -189,13 +186,11 @@
             <div class="row">
                 <div class="col-md-8 col-lg-8">
                     <ul class="footer-nav">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="home">Home</a></li>
                         <li><a href="#">About Us</a></li>
-                        <li><a href="blog.html">Blog</a></li>
                         <li><a href="#">Compnies represented</a></li>
-                        <li><a href="contact-us.html">Contact us</a></li>
+                        <li><a href="contact-us">Contact us</a></li>
                         <li><a href="#">Services</a></li>
-                        <li><a href="#">Products</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 col-lg-2 col-md-offset-2 col-lg-offset-2">
