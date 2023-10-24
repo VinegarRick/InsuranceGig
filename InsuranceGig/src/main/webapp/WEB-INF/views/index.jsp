@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@ page isELIgnored="false" %> 
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  
 <head>
     <meta charset="utf-8">
@@ -27,6 +28,21 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="./js/index.js"></script>
+    <style>
+        .form-select div {
+            margin-top: 1px; 
+            margin-left: 10px;
+            border: 1px solid #f3f3f3;
+        }
+
+        .form-select > div > label {
+            /*color: #888;*/
+            color: #989898;
+            opacity: 0.6; 
+        }
+    </style>
 </head>
 
 <body data-spy="scroll" data-target=".navbar-fixed-top">
@@ -56,7 +72,7 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                         <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand" href="index">
+                    <a class="navbar-brand" href="home">
                         Auto Insurance<span>Gig</span>
                     </a>
                     <p>Call Us Now <b>+215 (362) 4579</b></p>
@@ -67,10 +83,33 @@
                             <a href="home">Home</a>
                         </li>
                         <li>
+                            <a href="plans">Plans</a>
+                        </li>
+                        <li>
                             <a href="contact-us">Contact</a>
                         </li>
                         <li>
-                            <a href="insurance" class="btn-default">Buy Auto Insurance</a>
+                            <c:choose>
+                                <c:when test="${not empty username}">
+                                    <a href="application" class="btn-default">Buy Auto Insurance</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="/login" class="btn-default">Buy Auto Insurance</a>
+                                </c:otherwise>
+                            </c:choose>
+                        </li>
+                        <li>
+                            <c:choose>
+                                <c:when test="${not empty username}">
+                                    <a href="login?logout">Log Out</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="/login">Log In</a>
+                                    <li>
+                                        <a href="#">Sign Up</a>
+                                    </li>
+                                </c:otherwise>
+                            </c:choose>
                         </li>
                     </ul>
                 </div>
@@ -157,29 +196,55 @@
                         <h2>Get a free quote form</h2>
                         <form id="get-quote">
                             <div>
-                                <input type="text" name="name" placeholder="Your Name" />
+                                <input type="text" id="name" name="name" placeholder="Your Name" />
                             </div>
                             <div>
-                                <input type="text" name="email" placeholder="Email" />
+                                <input type="text" id="email" name="email" placeholder="Email" />
                             </div>
                             <div>
-                                <input type="text" name="ph-no" placeholder="Phone no" />
-                            </div>
+                                <input type="text" id="ph-no" name="ph-no" placeholder="Phone No" />
+                            </div><br>
+                            <div>
+                                <span>Estimated Vehicle Valuation:</span><br><br>
+                                <input type="number" id="valuation" name="valuation" placeholder="0" />
+                            </div><br>                            
+                            <span>Select Coverage Plans:</span>
                             <div class="form-select">
-                                <span></span>
-                                <select>
-                                    <option>Plan</option>
-                                </select>
+                                <div>
+                                    <input type="checkbox" name="plans" id="liability" value="Liability">
+                                    <label for="liability">Liability</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="plans" id="collision" value="Collision">
+                                    <label for="collision">Collision</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="plans" id="comprehensive" value="Comprehensive">
+                                    <label for="comprehensive">Comprehensive</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="plans" id="uninsured" value="Uninsured">
+                                    <label for="uninsured">Uninsured</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="plans" id="medical" value="Medical">
+                                    <label for="medical">Medical</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="plans" id="roadside-assistance" value="Roadside Assistance">
+                                    <label for="roadside-assistance">Roadside Assistance</label>
+                                </div>
                             </div>
                             <div>
-                                <textarea rows="1" cols="1" placeholder="Message"></textarea>
+                                <textarea rows="1" cols="1" id="message" placeholder="Message"></textarea>
                             </div>
                             <div class="text-center">
-                                <input type="submit" class="btn-default" value="Get Free Quote" />
+                                <input type="submit" id="quote-submit-button" class="btn-default" value="Get Free Quote" />
                             </div>
                         </form>
                     </div>
                 </section>
+                
             </div>
         </div>
 
@@ -401,7 +466,7 @@
             <div class="row">
                 <div class="col-md-8 col-lg-8">
                     <ul class="footer-nav">
-                        <li><a href="index">Home</a></li>
+                        <li><a href="home">Home</a></li>
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Compnies represented</a></li>
                         <li><a href="contact-us">Contact us</a></li>

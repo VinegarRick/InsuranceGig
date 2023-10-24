@@ -53,10 +53,10 @@ public class SecurityConfig {
 		http
 		.apply(MyCustomDsl.customDsl()).flag(true).and()
 		.authorizeRequests().requestMatchers("/home/**", "").permitAll().and()
-		.authorizeRequests().requestMatchers(("/home")).hasAnyRole("USER", "ADMIN")
-		.and().formLogin().loginPage("/login").defaultSuccessUrl("/home").permitAll();
+		.authorizeRequests().requestMatchers(("/home")).hasAnyRole("USER", "ADMIN").and()
+		.formLogin().loginPage("/login").defaultSuccessUrl("/home").permitAll();
 		return http.build();
 	}
-	
 
+	
 }

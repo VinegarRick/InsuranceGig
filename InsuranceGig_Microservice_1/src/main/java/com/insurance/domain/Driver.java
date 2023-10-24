@@ -21,8 +21,8 @@ public class Driver {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int driverId;
-	private int userId;
+	private Long driverId;
+	private Long userId;
 	private String firstName;
 	private String lastName;
 	@Embedded
@@ -35,19 +35,19 @@ public class Driver {
 	@OneToMany(cascade = CascadeType.ALL)	
 	private List<Payment> payments = new ArrayList<>();
 
-	public int getDriverId() {
+	public Long getDriverId() {
 		return driverId;
 	}
 
-	public void setDriverId(int driverId) {
+	public void setDriverId(Long driverId) {
 		this.driverId = driverId;
 	}
 
-	public int getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -119,7 +119,7 @@ public class Driver {
 		super();
 	}
 
-	public Driver(int driverId, int userId, String firstName, String lastName, Address address, Date dateOfBirth,
+	public Driver(Long driverId, Long userId, String firstName, String lastName, Address address, Date dateOfBirth,
 			int policyId, String mobile, String email, List<Payment> payments) {
 		super();
 		this.driverId = driverId;

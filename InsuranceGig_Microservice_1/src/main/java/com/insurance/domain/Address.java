@@ -7,16 +7,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-//@Embeddable
-@Entity
-@Table(name="addresses")
+@Embeddable
+//@Entity
+//@Table(name="addresses")
 public class Address {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long addressId;
-	//private String addressLine;
-	private String street;
+	//@Id
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//private Long addressId;
+	private String addressLine;
+	//private String street;
 	private String city;
+	private String county;
 	private String state;
 	private String zipcode;
 	
@@ -24,28 +25,29 @@ public class Address {
 		super();
 	}
 
-	public Address(Long addressId, String city, String state, String country, String zipcode) {
+	public Address(String addressLine, String city, String county, String state, String zipcode) {
 		super();
-		this.addressId = addressId;
+		this.addressLine = addressLine;
 		this.city = city;
+		this.county = county;
 		this.state = state;
 		this.zipcode = zipcode;
 	}
 
-	public Long getAddressId() {
-		return addressId;
+	public String getAddressLine() {
+		return addressLine;
 	}
 
-	public void setAddressId(Long addressId) {
-		this.addressId = addressId;
+	public void setAddressLine(String addressLine) {
+		this.addressLine = addressLine;
 	}
 
-	public String getStreet() {
-		return street;
+	public String getCounty() {
+		return county;
 	}
 
-	public void setStreet(String street) {
-		this.street = street;
+	public void setCounty(String county) {
+		this.county = county;
 	}
 
 	public String getCity() {

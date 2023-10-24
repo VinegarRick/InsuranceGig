@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@ page isELIgnored="false" %> 
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  
 <head>
     <meta charset="utf-8">
@@ -24,6 +25,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="./js/contact.js"></script>
 </head>
 
 <body data-spy="scroll" data-target=".navbar-fixed-top">
@@ -64,10 +67,33 @@
                             <a href="home">Home</a>
                         </li>
                         <li>
+                            <a href="plans">Plans</a>
+                        </li>
+                        <li>
                             <a href="contact-us">Contact</a>
                         </li>
                         <li>
-                            <a href="#" class="btn-default">Buy Auto Insurance</a>
+                            <c:choose>
+                                <c:when test="${not empty username}">
+                                    <a href="application" class="btn-default">Buy Auto Insurance</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="/login" class="btn-default">Buy Auto Insurance</a>
+                                </c:otherwise>
+                            </c:choose>
+                        </li>
+                        <li>
+                            <c:choose>
+                                <c:when test="${not empty username}">
+                                    <a href="login?logout">Log Out</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="/login">Log In</a>
+                                    <li>
+                                        <a href="#">Sign Up</a>
+                                    </li>
+                                </c:otherwise>
+                            </c:choose>
                         </li>
                     </ul>
                 </div>
@@ -92,12 +118,12 @@
                         <div class="form-box">
                             <h2>Get in Touch</h2>
                             <div class="form-content">
-                                <input type="text" name="name" placeholder="Your Name" />
-                                <input type="text" name="email" placeholder="Email" />
-                                <input type="text" name="subject" placeholder="Subject" />
-                                <textarea rows="1" cols="1" name="message" placeholder="Message"></textarea>
+                                <input type="text" id="name" name="name" placeholder="Your Name" />
+                                <input type="text" id="email" name="email" placeholder="Email" />
+                                <input type="text" id="subject" name="subject" placeholder="Subject" />
+                                <textarea rows="1" cols="1" id="message" name="message" placeholder="Message"></textarea>
                                 <div class="text-center">
-                                    <input type="submit" class="btn-default" value="Submit" />
+                                    <input type="submit" id="submit-button" class="btn-default" value="Submit" />
                                 </div>
                             </div>
                         </div>
@@ -218,7 +244,7 @@
             </div>
         </div>
     </footer>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hover-dropdown/2.2.1/bootstrap-hover-dropdown.min.js"></script>
     <script src="js/custom.js"></script>

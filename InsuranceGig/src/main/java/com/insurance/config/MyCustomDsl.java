@@ -24,4 +24,5 @@ public class MyCustomDsl extends AbstractHttpConfigurer<MyCustomDsl, HttpSecurit
 	public static MyCustomDsl customDsl() {
 		return new MyCustomDsl();
 	}
+	
 }

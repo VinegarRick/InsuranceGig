@@ -3,6 +3,7 @@ package com.insurance.domain;
 import java.util.Date;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,15 +31,18 @@ public class Payment {
 	private String cvv;
 	private String nameOnCard;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "addressId")
+	//@OneToOne(cascade = CascadeType.ALL)
+	//@JoinColumn(name = "addressId")
+	@Embedded
 	private Address billingAddress;
 	
 	public Payment() {
 		super();
 	}
+	
 	public Payment(int paymentId, double amount, Date insuranceStateDate, Date insuranceEndDate, Date payDate,
-			String status) {
+			String status, String paymentMethod, String bankAccountNo, String cardNo, String expiryDate, String cvv,
+			String nameOnCard, Address billingAddress) {
 		super();
 		this.paymentId = paymentId;
 		this.amount = amount;
@@ -46,7 +50,15 @@ public class Payment {
 		this.insuranceEndDate = insuranceEndDate;
 		this.payDate = payDate;
 		this.status = status;
+		this.paymentMethod = paymentMethod;
+		this.bankAccountNo = bankAccountNo;
+		this.cardNo = cardNo;
+		this.expiryDate = expiryDate;
+		this.cvv = cvv;
+		this.nameOnCard = nameOnCard;
+		this.billingAddress = billingAddress;
 	}
+
 	public int getPaymentId() {
 		return paymentId;
 	}
@@ -83,6 +95,11 @@ public class Payment {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+	public Address getBillingAddress() {
+		return billingAddress;
+	}
+	public void setBillingAddress(Address billingAddress) {
+		this.billingAddress = billingAddress;
+	}
 	
 }
