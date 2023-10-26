@@ -57,6 +57,15 @@ public class HomeController {
 		return "application";
 	}
 	
+	@GetMapping(value = "profile")
+	public String profile(Principal principal, Model model) {
+		if (principal != null) {
+			model.addAttribute("username", principal.getName());
+		}
+		
+		return "profile";
+	}
+	
 	@GetMapping(value = "/login")
 	public String login(@RequestParam(required = false) String logout, @RequestParam(required = false) String error,
 			HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Model model) {

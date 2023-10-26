@@ -30,76 +30,8 @@
 </head>
 
 <body data-spy="scroll" data-target=".navbar-fixed-top">
-    <header>
-        <div class="top-bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 address">
-                        <i class="ti-location-pin"></i> 2109 WS 09 Oxford Rd #127 ParkVilla Hills, MI 48334
-                    </div>
-                    <div class="col-sm-6 social">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
-                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                        <i class="fa fa-bars"></i>
-                    </button>
-                    <a class="navbar-brand" href="home">
-                        Insurance<span>Gig</span>
-                    </a>
-                    <p>Call Us Now <b>+215 (362) 4579</b></p>
-                </div>
-                <div class="collapse navbar-collapse navbar-main-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="home">Home</a>
-                        </li>
-                        <li>
-                            <a href="plans">Plans</a>
-                        </li>
-                        <li>
-                            <a href="contact-us">Contact</a>
-                        </li>
-                        <li>
-                            <c:choose>
-                                <c:when test="${not empty username}">
-                                    <a href="application" class="btn-default">Buy Auto Insurance</a>
-                                </c:when>
-                                <c:otherwise>
-                                    <a href="/login" class="btn-default">Buy Auto Insurance</a>
-                                </c:otherwise>
-                            </c:choose>
-                        </li>
-                        <li>
-                            <c:choose>
-                                <c:when test="${not empty username}">
-                                    <a href="login?logout">Log Out</a>
-                                </c:when>
-                                <c:otherwise>
-                                    <a href="/login">Log In</a>
-                                    <li>
-                                        <a href="#">Sign Up</a>
-                                    </li>
-                                </c:otherwise>
-                            </c:choose>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <%@ include file ="header.jsp" %>
+
     <div class="clear"></div>
     <div id="page-content">
         <section class="breadcrumb">
@@ -173,77 +105,8 @@
         </section>
     </div>
     <div class="clear"></div>
-    <footer>
-        <div class="container">
-            <div class="row contact-sec">
-                <div class="col-md-5 col-lg-5">
-                    <h2>Insurance<span>Gig</span></h2>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <p>E104 Dharti -2 , Nr Silverstar Mall Chandlodia - Ahmedabad
-                                <br/>Zip - 382481</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-phone"></i> +91 123 456 7890</a></li>
-                                <li><a href="#"><i class="ti-email"></i> info@bootstrapmart.com</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <a href="#" class="btn-default">Contact Us</a>
-                </div>
-                <div class="col-md-5 col-lg-5 col-md-offset-2 col-lg-offset-2">
-                    <h2>Agent<span>Detail</span></h2>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <p>E104 Dharti -2 , Nr Silverstar Mall Chandlodia - Ahmedabad
-                                <br/>Zip - 382481</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-phone"></i> +91 123 456 7890</a></li>
-                                <li><a href="#"><i class="ti-email"></i> info@bootstrapmart.com</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <a href="#" class="btn-default">Contact Agent</a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8 col-lg-8">
-                    <ul class="footer-nav">
-                        <li><a href="home">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Compnies represented</a></li>
-                        <li><a href="contact-us">Contact us</a></li>
-                        <li><a href="#">Services</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2 col-lg-2 col-md-offset-2 col-lg-offset-2">
-                    <ul class="footer-social">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        Copyright &copy; 2018 distributed by <a href="https://themewagon.com/">ThemeWagon</a>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6 text-right">
-                        <a href="#">Terms & Conditions</a>
-                        <a href="#">Policy</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <%@ include file ="footer.jsp" %>
+
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hover-dropdown/2.2.1/bootstrap-hover-dropdown.min.js"></script>
