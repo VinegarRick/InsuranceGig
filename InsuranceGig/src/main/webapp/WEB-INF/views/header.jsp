@@ -1,3 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <header>
     <div class="top-bar">
         <div class="container">
@@ -56,6 +59,11 @@
                                 <li>
                                     <a href="/profile">Profile</a>
                                 </li>
+                                <c:if test="${fn:contains(userRoles, 'Admin')}">
+                                    <li>
+                                        <a href="/applications">Applications</a>
+                                    </li>
+                                </c:if>
                                 <li>
                                     <a href="login?logout">Log Out</a>
                                 </li>

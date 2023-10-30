@@ -6,4 +6,5 @@ import com.insurance.domain.Application;
 
 public interface ApplicationRepository extends JpaRepository<Application, Long> {
 
+	Application findByUsername(String username);
 }

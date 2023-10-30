@@ -2,8 +2,12 @@ package com.insurance.controller;
 
 
 import java.security.Principal;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -23,6 +27,15 @@ public class HomeController {
 	public String home(Principal principal, Model model) {
 		if (principal != null) {
 			model.addAttribute("username", principal.getName());
+			
+	        /*Authentication authentication = (Authentication) principal;
+	        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+
+	        List<String> roleNames = authorities.stream()
+	            .map(GrantedAuthority::getAuthority)
+	            .collect(Collectors.toList());
+
+	        model.addAttribute("userRoles", roleNames);*/
 		}
 		
 		return "index";
@@ -61,6 +74,15 @@ public class HomeController {
 	public String profile(Principal principal, Model model) {
 		if (principal != null) {
 			model.addAttribute("username", principal.getName());
+			
+	        Authentication authentication = (Authentication) principal;
+	        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+
+	        List<String> roleNames = authorities.stream()
+	            .map(GrantedAuthority::getAuthority)
+	            .collect(Collectors.toList());
+
+	        model.addAttribute("userRoles", roleNames);
 		}
 		
 		return "profile";

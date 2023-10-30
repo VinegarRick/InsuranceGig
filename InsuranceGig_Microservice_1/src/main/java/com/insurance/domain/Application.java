@@ -19,6 +19,8 @@ public class Application {
 	
 	private String status;
 	
+	private String username;
+	
 	private String firstName;
 	
 	private String lastName;
@@ -57,12 +59,14 @@ public class Application {
 		super();
 	}
 
-	public Application(Long applicationId, String status, String firstName, String lastName, String addressLine,
-			String city, String county, String zipcode, Date dateOfBirth, String gender, String licenseNo, String ssn,
-			String vin, int carYear, String carMake, String carModel, int carMileage, String plans) {
+	public Application(Long applicationId, String status, String username, String firstName, String lastName,
+			String addressLine, String city, String county, String zipcode, Date dateOfBirth, String gender,
+			String licenseNo, String ssn, String vin, int carYear, String carMake, String carModel, int carMileage,
+			String plans) {
 		super();
 		this.applicationId = applicationId;
 		this.status = status;
+		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.addressLine = addressLine;
@@ -81,6 +85,8 @@ public class Application {
 		this.plans = plans;
 	}
 
+
+
 	public Long getApplicationId() {
 		return applicationId;
 	}
@@ -88,7 +94,7 @@ public class Application {
 	public void setApplicationId(Long applicationId) {
 		this.applicationId = applicationId;
 	}
-
+	
 	public String getStatus() {
 		return status;
 	}
@@ -96,6 +102,15 @@ public class Application {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 
 	public String getFirstName() {
 		return firstName;

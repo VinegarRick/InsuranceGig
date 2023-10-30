@@ -32,4 +32,17 @@ public class ApplicationComponent {
 		
 		return returnObj;
 	}
+	
+	public JsonNode findApplicationByUsername(String username) {
+		System.out.println("inside getApplicationByUsername of ApplicationComponent");
+		
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<Object> responseEntity = restTemplate.getForEntity("http://localhost:8383/findApplicationByUsername/" + username, Object.class);
+		Object objects = responseEntity.getBody();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode returnObj = mapper.convertValue(objects, JsonNode.class);
+		
+		return returnObj;
+	}
 }

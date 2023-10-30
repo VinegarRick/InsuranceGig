@@ -23,7 +23,7 @@ public class ApplicationService {
 		return application;
 	}
 
-	public Application findByApplicationId(long applicationId) {
+	public Application findApplicationById(long applicationId) {
 		Optional<Application> application = applicationRepository.findById(applicationId);
 		if(application.isPresent()) {
 			return application.get();
@@ -32,9 +32,15 @@ public class ApplicationService {
 		}
 	}
 
+	public Application findApplicationByUsername(String username) {
+		Application application = applicationRepository.findByUsername(username);
+		
+		return application;
+	}
+	
 	public void deleteApplicationById(long applicationId) {
 		applicationRepository.deleteById(applicationId);
 		
 	}
-
+	
 }

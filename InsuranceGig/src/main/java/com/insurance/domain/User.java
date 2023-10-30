@@ -3,6 +3,8 @@ package com.insurance.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -32,16 +34,31 @@ public class User {
 	
 	private Integer driverId;
 	
-		
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="user_role")
 	private Set<Role> roles = new HashSet<>();
+	
+	public User() {
+		super();
+	}
+	
+	public User(long userId, String userName, String userPassword, String email, String customerMobile,
+			Integer driverId, Set<Role> roles) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.userPassword = userPassword;
+		this.email = email;
+		this.customerMobile = customerMobile;
+		this.driverId = driverId;
+		this.roles = roles;
+	}
 
 	public long getUserId() {
 		return userId;
 	}
 
-	
 	public void setUserId(long userId) {
 		this.userId = userId;
 	}
@@ -69,43 +86,30 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
-	
 
 	public String getEmail() {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
-	public User() {
-		super();
-	}
-
 
 	public String getCustomerMobile() {
 		return customerMobile;
 	}
 
-
 	public void setCustomerMobile(String customerMobile) {
 		this.customerMobile = customerMobile;
 	}
-
 
 	public Integer getDriverId() {
 		return driverId;
 	}
 
-
 	public void setDriverId(Integer driverId) {
 		this.driverId = driverId;
 	}
-	
 	
 	
 }

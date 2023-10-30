@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@ page isELIgnored="false" %> 
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  
 <head>
     <meta charset="utf-8">
@@ -30,31 +29,12 @@
     <![endif]-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <script src="./js/profile.js"></script>
+    <script src="./js/pending-applications.js"></script>
     <script>
         var username = "${username}";
     </script>
     <style>
-        .profile-nav-link {
-                font-size: 18px; 
-                padding: 5px 10px; 
-                text-decoration: none; 
-                border-radius: 5px;
-                margin-right: 10px; 
-                margin-left:10px;
-        }
 
-        .active-link {
-            background-color: #007BFF !important;
-            color: #fff !important; 
-            font-weight: bold !important;
-        }
-
-        
-        .profile-navbar, .page-content label {
-            display: flex;
-            justify-content: center;
-        }
     </style>
 </head>
 
@@ -63,35 +43,10 @@
 
     <div class="clear"></div>
     <div id="page-content"><br>
-        <div id="profile-navbar" class="profile-navbar">
-            <a href="#" id="userInfoLink" class="profile-nav-link active-link">User Info</a> 
-            <a href="#" id="policyInfoLink" class="profile-nav-link">Policy Info</a> 
-            <a href="#" id="paymentInfoLink" class="profile-nav-link">Payment Info</a>
-            <a href="#" id="applicationStatusLink" class="profile-nav-link">Application Status</a>
-        </div><br><br>
-
-        <div id="userInfo" class="text-center">
-            <label id="usernameLabel">Username: ${username}</label><br>
-            <label id="emailLabel">Email: </label><br>
-            <label id="mobileLabel">Mobile: </label><br>
-        </div>
-    
-        <div id="policyInfo" class="text-center">
-            test 2
-        </div>
-    
-        <div id="paymentInfo" class="text-center">
-            test 3
-        </div>
-    
-        <div id="applicationStatus" class="text-center">
-            <label id="statusLabel">Status: </label><br>
-            <label id="applicationActions">Actions:</label>
-        </div>
 
     </div>
     </p></p>
 
-    <%@ include file ="footer.jsp" %>
+<%@ include file ="footer.jsp" %>
 </body>
 </html>

@@ -3,6 +3,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         var formData = {
+			username: username,
             firstName: $('#firstName').val(),
             lastName: $('#lastName').val(),
             mobile: $('#mobile').val(),
