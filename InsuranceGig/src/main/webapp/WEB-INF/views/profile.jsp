@@ -55,6 +55,39 @@
             display: flex;
             justify-content: center;
         }
+
+        #driverLicenseForm {
+            text-align: center;
+        }
+
+        #driverLicenseForm label {
+            /*text-align: right;*/
+            display: inline-block;
+            width: 220px; 
+            /*padding-right: 10px;*/
+        }
+
+        #driverLicenseForm input[type="text"],
+        #driverLicenseForm input[type="file"],
+        #driverLicenseForm select {
+            max-width: 190px;
+            text-align: left; 
+            display: inline-block;
+            padding-left: 5px;
+        }
+
+        #statusLabel.pending {
+            color: yellow; 
+        }
+
+        #statusLabel.approved {
+            color: green; 
+        }
+
+        #statusLabel.denied {
+            color: red; 
+        }
+
     </style>
 </head>
 
@@ -67,6 +100,8 @@
             <a href="#" id="userInfoLink" class="profile-nav-link active-link">User Info</a> 
             <a href="#" id="policyInfoLink" class="profile-nav-link">Policy Info</a> 
             <a href="#" id="paymentInfoLink" class="profile-nav-link">Payment Info</a>
+            <a href="#" id="fileClaimLink" class="profile-nav-link">File Claim</a> 
+            <a href="#" id="schedulePaymentLink" class="profile-nav-link">Schedule Payment</a> 
             <a href="#" id="applicationStatusLink" class="profile-nav-link">Application Status</a>
         </div><br><br>
 
@@ -74,19 +109,89 @@
             <label id="usernameLabel">Username: ${username}</label><br>
             <label id="emailLabel">Email: </label><br>
             <label id="mobileLabel">Mobile: </label><br>
+            <!--<div class="form-group">
+                <label for="usernameLabel">Username:</label>
+                <input id="usernameLabel" type="text" readonly>
+            </div>
+            <div class="form-group">
+                <label for="emailLabel">Email:</label>
+                <input id="emailLabel" type="text" readonly>
+            </div>
+            <div class="form-group">
+                <label for="mobileLabel">Mobile:</label>
+                <input id="mobileLabel" type="text" readonly>
+            </div>-->
         </div>
     
         <div id="policyInfo" class="text-center">
             test 2
         </div>
+
+        <div id="fileClaim" class="text-center">
+            test 3
+        </div>
+
+        <div id="schedulePayment" class="text-center">
+            test 4
+        </div>
     
         <div id="paymentInfo" class="text-center">
-            test 3
+            test 5
         </div>
     
         <div id="applicationStatus" class="text-center">
-            <label id="statusLabel">Status: </label><br>
-            <label id="applicationActions">Actions:</label>
+            <span><b>Application Status:</b></span>
+            <label id="statusLabel"></label><br>
+            <label id="applicationActions">Actions:</label><br><br>
+
+            <div id="driverLicenseForm" class="text-center" style="display: none;">
+                <form id="driverLicenseDetailsForm" enctype="multipart/form-data">
+                    <h3><u>Driver's License Information</u></h3><br>
+                    <label for="licenseNumber">Driver's License Number:</label><br>
+                    <input type="text" id="licenseNumber" name="licenseNumber">
+                    <br>
+                    <label for="expirationDate">Expiration Date:</label><br>
+                    <input type="date" id="expirationDate" name="expirationDate">
+                    <br><br>
+                    <label for="uploadLicense">Upload Driver's License:</label><br>
+                    <input type="file" id="uploadLicense" name="uploadLicense">
+                    <br><br>
+                    <h3><u>Payment Information</u></h3><br>
+                    <h4>Card Info</h4>
+                    <label for="nameOnCard">Name on Card:</label><br>
+                    <input type="text" id="nameOnCard" name="nameOnCard">
+                    <br>
+                    <label for="cardNumber">Card Number:</label><br>
+                    <input type="text" id="cardNumber" name="cardNumber">
+                    <br>
+                    <label for="cardExpirationDate">Card Expiration Date:</label><br>
+                    <input type="date" id="cardExpirationDate" name="cardExpirationDate">
+                    <br><br>
+                    <label for="cvv">Card Verfication Value:</label><br>
+                    <input type="text" id="cvv" name="cvv">
+                    <br>
+                    <h4>Bank Account Info</h4>
+                    <label for="nameOnAccount">Name on Account:</label><br>
+                    <input type="text" id="nameOnAccount" name="nameOnAccount">
+                    <br>
+                    <label for="accountType">Account Type:</label><br>
+                    <select id="accountType" name="accountType">
+                        <option value="" disable selected hidden>Choose Account Type</option>
+                        <option value="Checking Account">Checking Account</option>
+                        <option value="Savings Account">Savings Account</option>
+                    </select>
+                    <br><br>
+                    <label for="routingNumber">Routing Number:</label><br>
+                    <input type="text" id="routingNumber" name="routingNumber">
+                    <br>
+                    <label for="accountNumber">Account Number:</label><br>
+                    <input type="text" id="accountNumber" name="accountNumber">
+                    <br>
+                    <br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+            
         </div>
 
     </div>

@@ -23,17 +23,20 @@ public class DriversLicense {
 	private String licenseNumber;
 	
 	private Date expirationDate;
+	
+	private String username;
 
 	public DriversLicense() {
 		super();
 	}
 
-	public DriversLicense(Long id, byte[] driversLicense, String licenseNumber, Date expirationDate) {
+	public DriversLicense(Long id, byte[] driversLicense, String licenseNumber, Date expirationDate, String username) {
 		super();
 		this.id = id;
 		this.driversLicense = driversLicense;
 		this.licenseNumber = licenseNumber;
 		this.expirationDate = expirationDate;
+		this.username = username;
 	}
 
 	public Long getId() {
@@ -66,6 +69,14 @@ public class DriversLicense {
 
 	public void setExpirationDate(Date expirationDate) {
 		this.expirationDate = expirationDate;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	

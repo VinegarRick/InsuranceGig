@@ -1,6 +1,8 @@
 package com.insurance.controller;
 
+import java.io.IOException;
 import java.security.Principal;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,13 +11,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.insurance.component.ApplicationComponent;
 import com.insurance.component.EmailComponent;
+import com.insurance.component.ProfileComponent;
 import com.insurance.domain.User;
 import com.insurance.service.UserService;
 
@@ -26,6 +31,7 @@ public class GatewayController {
 
 	@Autowired ApplicationComponent applicationComponent;
 	@Autowired EmailComponent emailComponent;
+	@Autowired ProfileComponent profileComponent;
 	@Autowired UserService userService;
 	
 	@Transactional
@@ -46,6 +52,22 @@ public class GatewayController {
 	    
 		return application;
 	}
+	
+	@PostMapping(value="/savePaymentInfo")
+	public JsonNode savePaymentInfo(@RequestBody JsonNode payload) {		
+		JsonNode paymentInfo = profileComponent.savePaymentInfo(payload);
+		
+		return paymentInfo;
+	}
+	
+	@PostMapping(value = "/saveDriversLicense")
+	public JsonNode saveDriversLicense(@RequestParam("driversLicense") MultipartFile driversLicense, @RequestParam("licenseNumber") String licenseNumber, @RequestParam("expirationDate") Date expirationDate, @RequestParam("username") String username) throws IOException {
+
+	    JsonNode response = profileComponent.saveDriversLicense(driversLicense, licenseNumber, expirationDate, username);
+
+	    return response;
+	}
+
 	
 	@PostMapping(value = "/sendContactEmail")
 	public JsonNode sendContactEmail(@RequestBody JsonNode payload) {
