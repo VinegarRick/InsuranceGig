@@ -2,6 +2,7 @@ package com.insurance.component;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.core.io.FileSystemResource;
@@ -41,7 +42,20 @@ public class ProfileComponent {
 		return returnObj;
 	}	
 	
-    public JsonNode saveDriversLicense(MultipartFile driversLicense, String licenseNumber, Date expirationDate, String username) throws IOException {
+	public JsonNode findPaymentInfoByUsername(String username) {
+		System.out.println("inside findPaymentInfo in ProfileComponent");
+		
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<Object> responseEntity = restTemplate.getForEntity("http://localhost:8383/findPaymentInfoByUsername/" + username, Object.class);
+		Object objects = responseEntity.getBody();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode returnObj = mapper.convertValue(objects, JsonNode.class);
+		
+		return returnObj;
+	}
+	
+    public JsonNode saveDriversLicense(MultipartFile driversLicense, String licenseNumber, String expirationDate, String username) throws IOException {
     	System.out.println("inside saveDriversLicense of ProfileComponent");
     	
         HttpHeaders headers = new HttpHeaders();
@@ -69,8 +83,22 @@ public class ProfileComponent {
     }
 
     private File convert(MultipartFile file) throws IOException {
-        File convFile = new File(file.getOriginalFilename());
+        //File convFile = new File(file.getOriginalFilename());
+    	File convFile = File.createTempFile("uploadedFile", null);
         file.transferTo(convFile);
         return convFile;
     }
+    
+	public JsonNode findDriversLicenseByUsername(String username) {
+		System.out.println("inside findApplicationByUsername in ProfileComponent");
+		
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<Object> responseEntity = restTemplate.getForEntity("http://localhost:8383/findDriversLicenseByUsername/" + username, Object.class);
+		Object objects = responseEntity.getBody();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode returnObj = mapper.convertValue(objects, JsonNode.class);
+		
+		return returnObj;
+	}
 }

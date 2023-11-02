@@ -1,6 +1,9 @@
 package com.insurance.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +18,9 @@ public class PaymentInfo {
 	private int paymentInfoId;
 	private String nameOnCard;
 	private String cardNo;
-	private Date expirationDate;
+	//private Date expirationDate;
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
+	private LocalDate expirationDate;
 	private String cvv;
 	private String nameOnAccount;
 	private String accountType;
@@ -28,7 +33,7 @@ public class PaymentInfo {
 		super();
 	}
 
-	public PaymentInfo(int paymentInfoId, String nameOnCard, String cardNo, Date expirationDate, String cvv,
+	public PaymentInfo(int paymentInfoId, String nameOnCard, String cardNo, LocalDate expirationDate, String cvv,
 			String nameOnAccount, String accountType, String routingNo, String accountNo, String username) {
 		super();
 		this.paymentInfoId = paymentInfoId;
@@ -67,11 +72,11 @@ public class PaymentInfo {
 		this.cardNo = cardNo;
 	}
 
-	public Date getExpirationDate() {
+	public LocalDate getExpirationDate() {
 		return expirationDate;
 	}
 
-	public void setExpirationDate(Date expirationDate) {
+	public void setExpirationDate(LocalDate expirationDate) {
 		this.expirationDate = expirationDate;
 	}
 

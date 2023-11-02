@@ -1,5 +1,6 @@
 package com.insurance.controller;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,14 +67,19 @@ public class Microservice1Controller {
 		return paymentInfoService.save(paymentInfo);
 	}
 	
-    @PostMapping("/saveDriversLicense")
-    public DriversLicense saveDriversLicense(@RequestParam("driversLicense") MultipartFile driversLicense, @RequestParam("licenseNumber") String licenseNumber, @RequestParam("expirationDate") Date expirationDate, @RequestParam("username") String username) {
-        try {
+    @PostMapping(value="/saveDriversLicense")
+    public DriversLicense saveDriversLicense(@RequestParam("driversLicense") MultipartFile driversLicense, @RequestParam("licenseNumber") String licenseNumber, @RequestParam("expirationDate") String expirationDate, @RequestParam("username") String username) {
+        System.out.println("in /saveDriversLicense of microservice");
+    	
+    	try {
             byte[] driversLicenseData = driversLicense.getBytes();
             DriversLicense driversLicenseEntity = new DriversLicense();
             driversLicenseEntity.setDriversLicense(driversLicenseData);
             driversLicenseEntity.setLicenseNumber(licenseNumber);
-            driversLicenseEntity.setExpirationDate(expirationDate);
+            
+            LocalDate parsedExpirationDate = LocalDate.parse(expirationDate);
+            
+            driversLicenseEntity.setExpirationDate(parsedExpirationDate);
             driversLicenseEntity.setUsername(username);
             
             DriversLicense savedLicense = driversLicenseService.save(driversLicenseEntity);
@@ -85,6 +91,16 @@ public class Microservice1Controller {
         }
     }
 	
+    @GetMapping(value="/findDriversLicenseByUsername/{username}")
+    public DriversLicense findDriversLicenseByUsername(@PathVariable String username) {
+    	return driversLicenseService.findDriversLicenseByUsername(username);
+    }
+    
+    @GetMapping(value="/findPaymentInfoByUsername/{username}")
+    public PaymentInfo findPaymentInfoByUsername(@PathVariable String username) {
+    	return paymentInfoService.findPaymentInfoByUsername(username);
+    }
+    
 	@GetMapping(value="/findApplicationByUsername/{username}")
 	public Application findApplicationByUsername(@PathVariable String username) {
 		System.out.println("fetching application...");

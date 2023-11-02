@@ -2,9 +2,13 @@ package com.insurance.controller;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,14 +64,25 @@ public class GatewayController {
 		return paymentInfo;
 	}
 	
+	@GetMapping(value="/findPaymentInfoByUsername")
+	public JsonNode findPaymentInfoByUsername(Principal principal) {
+		return profileComponent.findPaymentInfoByUsername(principal.getName());
+	}
+	
 	@PostMapping(value = "/saveDriversLicense")
-	public JsonNode saveDriversLicense(@RequestParam("driversLicense") MultipartFile driversLicense, @RequestParam("licenseNumber") String licenseNumber, @RequestParam("expirationDate") Date expirationDate, @RequestParam("username") String username) throws IOException {
-
+	public JsonNode saveDriversLicense(@RequestParam("driversLicense") MultipartFile driversLicense, @RequestParam("licenseNumber") String licenseNumber, @RequestParam("expirationDate") String expirationDate, @RequestParam("username") String username) throws IOException, ParseException {
+		System.out.println("inside saveDriversLicense of GatewayController");
+		
 	    JsonNode response = profileComponent.saveDriversLicense(driversLicense, licenseNumber, expirationDate, username);
 
 	    return response;
 	}
 
+	
+	@GetMapping(value="/findDriversLicenseByUsername")
+	public JsonNode findDriversLicenseByUsername(Principal principal) {
+		return profileComponent.findDriversLicenseByUsername(principal.getName());
+	}
 	
 	@PostMapping(value = "/sendContactEmail")
 	public JsonNode sendContactEmail(@RequestBody JsonNode payload) {
@@ -76,7 +91,6 @@ public class GatewayController {
 		return payload;
 	}
 
-	
 	@PostMapping(value="/sendQuoteEmail")
 	public JsonNode sendQuoteEmail(@RequestBody JsonNode payload) {
 		emailComponent.sendQuoteEmail(payload);

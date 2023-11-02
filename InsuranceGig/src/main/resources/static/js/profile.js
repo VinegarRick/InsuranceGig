@@ -73,6 +73,21 @@ $(document).ready(function () {
 		
 		$(".profile-nav-link").removeClass("active-link");
 		$(this).addClass("active-link");
+		
+	    $.ajax({
+	        type: "GET",
+	        url: "http://localhost:8282/findPaymentInfoByUsername",
+	        success: function (data) {
+				if (data == null) {
+					$("#noPaymentInfoNotice").show();
+				} else {
+					$("#schedulePaymentForm").show();
+				}
+	        },
+	        error: function () {
+	            console.log("Error fetching payment info");
+	        }
+	    });
 	})
 	
 	$("#paymentInfoLink").click(function() {
@@ -85,6 +100,32 @@ $(document).ready(function () {
 		
 		$(".profile-nav-link").removeClass("active-link");
 		$(this).addClass("active-link");
+		
+	    $.ajax({
+	        type: "GET",
+	        url: "http://localhost:8282/findPaymentInfoByUsername",
+	        success: function (data) {
+				$("#cardNumberLabel").text("No credit card on record");
+				$("#accountNumberLabel").text("No bank account on record");
+				
+				if (data != null && data.cardNo != null) {
+					$("#cardNumberLabel").text("Credit Card on File: " + data.cardNo);
+					$("#cardHolderLabel").text("Name on Card: " + data.nameOnCard);
+					$("#cardExpirationLabel").text("Card Expiration Date: " + data.expirationDate);
+					$("#cardInfo").show();
+				}
+				
+				if (data != null && data.accountNo != null) {
+					$("#accountNumberLabel").text("Bank Account No. on File: " + data.accountNo);
+					$("#accountHolderLabel").text("Name on Card: " + data.nameOnAccount);
+					$("#accountTypeLabel").text("Account Type: " + data.accountType);
+					$("#bankAccountInfo").show();
+				}
+	        },
+	        error: function () {
+	            console.log("Error fetching payment info");
+	        }
+	    });
 	})
 	
 	$("#applicationStatusLink").click(function() {
@@ -111,9 +152,26 @@ $(document).ready(function () {
 					$("#applicationActions").text("No action is necessary yet.");
 				} else if (status == "approved") {
 					$("#statusLabel").text("APPROVED");
-					$("#applicationActions").text("Please fill out the required information below.");
+					//$("#applicationActions").text("Please fill out the required information below.");
 					$("#statusLabel").addClass("approved");
-					$("#driverLicenseForm").show();
+					
+				    $.ajax({
+				        type: "GET",
+				        url: "http://localhost:8282/findDriversLicenseByUsername",
+				        success: function (data) {
+							if (data == null) {
+								$("#applicationActions").text("Please fill out the required information below.");
+								$("#driverLicenseForm").show();
+							} else {
+								$("#applicationActions").text("You will get an email within 3 days notifying when you can make your first payment after your policy has been assigned.");
+							}
+				        },
+				        error: function () {
+				            console.log("Error fetching driver's license");
+				        }
+				    });
+					
+					//$("#driverLicenseForm").show();
 				} else {
 					$("#statusLabel").text("DENIED");
 					$("#applicationActions").text("Your application has been denied.");
@@ -140,6 +198,9 @@ $(document).ready(function () {
         var accountType = $("#accountType").val();
         var routingNumber = $("#routingNumber").val();
         var accountNumber = $("#accountNumber").val();
+        //var expirationDate = new Date($("#expirationDate").val());
+		//var formattedExpirationDate = expirationDate.toISOString().split('T')[0];
+		//var formattedExpirationDate = expirationDate.toLocaleDateString('en-US');
 
 		var uploadedFile = document.getElementById("uploadLicense").files[0];
 		
@@ -147,7 +208,7 @@ $(document).ready(function () {
 			alert("No driver's license has been uploaded");
 			return;
 		}
-		
+				
 		var driverLicenseData = new FormData();
 		driverLicenseData.append('driversLicense', uploadedFile);
 	    driverLicenseData.append('licenseNumber', licenseNumber);
@@ -159,7 +220,7 @@ $(document).ready(function () {
 			licenseNumber : licenseNumber, 
 			expirationDate : expirationDate
 		}*/
-		
+				
 		var paymentData = {
 			nameOnCard : nameOnCard, 
 			cardNo : cardNumber, 
@@ -187,7 +248,7 @@ $(document).ready(function () {
 		            data: driverLicenseData,
 		            contentType: false,
 		            processData: false,
-		            success: function (driverLicenseresponse) {
+		            success: function (driverLicenseResponse) {
 		                console.log('Success: ', driverLicenseResponse);
 		                
 		                alert("Driver's license and payment info submitted!");

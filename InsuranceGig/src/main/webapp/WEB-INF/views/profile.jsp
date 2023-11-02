@@ -56,7 +56,8 @@
             justify-content: center;
         }
 
-        #driverLicenseForm {
+        #driverLicenseForm,
+        #schedulePaymentForm {
             text-align: center;
         }
 
@@ -65,6 +66,11 @@
             display: inline-block;
             width: 220px; 
             /*padding-right: 10px;*/
+        }
+
+        #schedulePaymentForm label {
+            display: inline-block;
+            width: 130px; 
         }
 
         #driverLicenseForm input[type="text"],
@@ -76,15 +82,29 @@
             padding-left: 5px;
         }
 
+        #schedulePaymentForm select {
+            max-width: 190px;
+            text-align: left; 
+            display: inline-block;
+            padding-left: 0px;
+        }
+
+        #statusText {
+            font-size: 24px;
+        }
+
         #statusLabel.pending {
+            font-size: 24px;
             color: yellow; 
         }
 
         #statusLabel.approved {
+            font-size: 24px;
             color: green; 
         }
 
         #statusLabel.denied {
+            font-size: 24px;
             color: red; 
         }
 
@@ -108,7 +128,8 @@
         <div id="userInfo" class="text-center">
             <label id="usernameLabel">Username: ${username}</label><br>
             <label id="emailLabel">Email: </label><br>
-            <label id="mobileLabel">Mobile: </label><br>
+            <label id="mobileLabel">Mobile: </label><br><br>
+            <input type="submit" value="Edit User Info">
             <!--<div class="form-group">
                 <label for="usernameLabel">Username:</label>
                 <input id="usernameLabel" type="text" readonly>
@@ -124,24 +145,56 @@
         </div>
     
         <div id="policyInfo" class="text-center">
-            test 2
+            test
         </div>
 
         <div id="fileClaim" class="text-center">
-            test 3
+            test
         </div>
 
         <div id="schedulePayment" class="text-center">
-            test 4
+            <h3><b>Make a Payment</b></h3><br>
+            <div id="noPaymentInfoNotice" style="display: none;">
+                <h3 style="color: red;">You have no payment info on record.</h3>
+            </div>
+
+            <div id="schedulePaymentForm" class="text-center" style="display: none;">
+                <form id="schedulePaymentDetailsForm">
+                    <label for="paymentAmountLabel">Payment Amount:</label>
+                    <input type="number" id="paymentAmount"><br><br>
+                    <label for="paymentOption">Payment Option:</label>
+                    <select id="paymentOption" name="paymentOption">
+                        <option value="" disable selected hidden>Select Payment Option</option>
+                        <option value="creditCard">Credit Card</option>
+                        <option value="bankAccount">Bank Account</option>
+                    </select><br><br>
+                    <label for="paymentDateLabel">Send On:</label><br>
+                    <input type="date" id="paymentDate" name="paymentDate"><br><br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
         </div>
     
         <div id="paymentInfo" class="text-center">
-            test 5
+            <h3>Credit Card Info:</h3><br>
+            <label id="cardNumberLabel">Credit Card on File: </label><br>
+            <div id="cardInfo" class="text-center" style="display: none;">
+                <label id="cardHolderLabel">Name on Card: </label><br>
+                <label id="cardExpirationLabel">Card Expiration Date: </label><br><br>
+                <input type="submit" value="Add New Card"><br><br><br>
+            </div>
+            <h3>Bank Account Info:</h3><br>
+            <label id="accountNumberLabel">Bank Account No. on File: </label><br>
+            <div id="bankAccountInfo" class="text-center" style="display: none;">
+                <label id="accountHolderLabel">Name on Account: </label><br>
+                <label id="accountTypeLabel">Account Type: </label><br><br>
+                <input type="submit" value="Add New Account">
+            </div>
         </div>
     
         <div id="applicationStatus" class="text-center">
-            <span><b>Application Status:</b></span>
-            <label id="statusLabel"></label><br>
+            <span id="statusText"><b>Status:</b></span>
+            <label id="statusLabel"></label><br><br>
             <label id="applicationActions">Actions:</label><br><br>
 
             <div id="driverLicenseForm" class="text-center" style="display: none;">
@@ -169,6 +222,7 @@
                     <br><br>
                     <label for="cvv">Card Verfication Value:</label><br>
                     <input type="text" id="cvv" name="cvv">
+                    <!--ADD BILLING ADDRESS-->
                     <br>
                     <h4>Bank Account Info</h4>
                     <label for="nameOnAccount">Name on Account:</label><br>

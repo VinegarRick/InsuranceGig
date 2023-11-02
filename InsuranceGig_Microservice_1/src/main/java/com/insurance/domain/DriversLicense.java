@@ -1,6 +1,8 @@
 package com.insurance.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,7 +24,8 @@ public class DriversLicense {
     
 	private String licenseNumber;
 	
-	private Date expirationDate;
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
+	private LocalDate expirationDate;
 	
 	private String username;
 
@@ -30,12 +33,12 @@ public class DriversLicense {
 		super();
 	}
 
-	public DriversLicense(Long id, byte[] driversLicense, String licenseNumber, Date expirationDate, String username) {
+	public DriversLicense(Long id, byte[] driversLicense, String licenseNumber, LocalDate expirationLocalDate, String username) {
 		super();
 		this.id = id;
 		this.driversLicense = driversLicense;
 		this.licenseNumber = licenseNumber;
-		this.expirationDate = expirationDate;
+		this.expirationDate = expirationLocalDate;
 		this.username = username;
 	}
 
@@ -63,12 +66,12 @@ public class DriversLicense {
 		this.licenseNumber = licenseNumber;
 	}
 
-	public Date getExpirationDate() {
+	public LocalDate getExpirationLocalDate() {
 		return expirationDate;
 	}
 
-	public void setExpirationDate(Date expirationDate) {
-		this.expirationDate = expirationDate;
+	public void setExpirationDate(LocalDate expirationLocalDate) {
+		this.expirationDate = expirationLocalDate;
 	}
 
 	public String getUsername() {
