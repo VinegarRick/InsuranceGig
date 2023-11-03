@@ -108,5 +108,17 @@ public class HomeController {
 
 	}
 	
-
+	@GetMapping("/registerForm")
+	public String registerForm(Model model) {
+	    return "register";
+	}
+	
+	@GetMapping("/admin")
+	public String adminPage (Principal principal, Model model) {
+		if (principal != null) {
+			model.addAttribute("username", principal.getName());
+		}
+		
+	    return "admin";
+	}
 }

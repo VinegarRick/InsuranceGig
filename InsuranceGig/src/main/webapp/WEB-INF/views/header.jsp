@@ -61,7 +61,7 @@
                                 </li>
                                 <c:if test="${fn:contains(userRoles, 'Admin')}">
                                     <li>
-                                        <a href="/applications">Applications</a>
+                                        <a href="/admin">Admin</a>
                                     </li>
                                 </c:if>
                                 <li>

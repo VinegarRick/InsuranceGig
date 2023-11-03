@@ -6,11 +6,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +27,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.insurance.component.ApplicationComponent;
 import com.insurance.component.EmailComponent;
 import com.insurance.component.ProfileComponent;
+import com.insurance.domain.Role;
 import com.insurance.domain.User;
+import com.insurance.service.RoleService;
 import com.insurance.service.UserService;
 
 import jakarta.transaction.Transactional;
@@ -37,6 +41,8 @@ public class GatewayController {
 	@Autowired EmailComponent emailComponent;
 	@Autowired ProfileComponent profileComponent;
 	@Autowired UserService userService;
+	@Autowired RoleService roleService;
+	@Autowired PasswordEncoder passwordEncoder;
 	
 	@Transactional
 	@PostMapping(value="/saveApplication")
@@ -108,5 +114,44 @@ public class GatewayController {
 		JsonNode application = applicationComponent.findApplicationByUsername(principal.getName());
 		
 		return application;
+	}
+	
+	@GetMapping(value="/findApplicationById/{applicationId}")
+	public ResponseEntity<?> findApplicationById(@PathVariable Long applicationId) {
+		ResponseEntity<?> response = applicationComponent.findApplicationById(applicationId);
+		return response;
+	}
+	
+	@GetMapping(value="/findAllApplications")
+	public JsonNode findAllApplications() {
+		return applicationComponent.findAllApplications();
+	}
+	
+	@PostMapping(value = "/updateApplicationStatus")
+	public ResponseEntity<?> updateApplicationStatus(@RequestBody Map<String, String> payload) {
+	    System.out.println("in updateApplicationStatus of GatewayController");
+	    ResponseEntity<?> response = applicationComponent.updateApplicationStatus(payload);
+	    return response;
+	}
+
+
+	
+	@PostMapping(value="/registerUser")
+	public User registerUser(@RequestBody JsonNode payload) {
+		User existingUser = userService.findByUserName(payload.get("username").asText());
+		if (existingUser != null) return null;
+		
+		User newUser = new User();
+		newUser.setUserName(payload.get("username").asText());
+		newUser.setEmail(payload.get("email").asText());
+		newUser.setCustomerMobile(payload.get("mobile").asText());
+		newUser.setUserPassword(passwordEncoder.encode(payload.get("password").asText()));
+		
+		Role userRole = roleService.findByRoleName("User");
+		newUser.getRoles().add(userRole);
+		
+		User user = userService.save(newUser);
+		
+		return user;
 	}
 }

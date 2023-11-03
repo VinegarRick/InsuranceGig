@@ -2,6 +2,9 @@ $(document).ready(function () {
     $('#application-submit-button').click(function (e) {
         e.preventDefault();
 
+		var currentDate = new Date();
+		var formattedCurrentDate = currentDate.toISOString().split('T')[0];
+
         var formData = {
 			username: username,
             firstName: $('#firstName').val(),
@@ -13,6 +16,7 @@ $(document).ready(function () {
             county: $('#county').val(),
             zipcode: $('#zipcode').val(),
             dateOfBirth: $('#dob').val(),
+            //dateOfBirth: formattedDateOfBirth,
             gender: $('#gender').val(),
             licenseNo: $('#licenseNo').val(),
             ssn: $('#ssn').val(),
@@ -21,7 +25,8 @@ $(document).ready(function () {
             carMake: $('#carMake').val(),
             carModel: $('#carModel').val(),
             carMileage: $('#carMileage').val(),
-            status: "pending"
+            status: "pending",
+            submittedDate: formattedCurrentDate
         };
 
         /*var coveragePlans = [];

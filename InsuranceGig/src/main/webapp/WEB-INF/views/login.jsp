@@ -37,7 +37,7 @@
 			<input class='form-control' type = 'password' name='password'/>
 		</div>
 		<div><span class='text-muted'>Forgot your password? </span ><a href='#'>Reset Here!</a></div>
-		<div><span class='text-muted'>Don't Have an Account? </span ><a href='/register'>Create Here!</a></div>
+		<div><span class='text-muted'>Don't Have an Account? </span ><a href='/registerForm'>Create Here!</a></div>
 		<input class='btn btn-primary mt-5' type = 'submit' value='Submit'/>
 		<sec:csrfInput/>
 	</frm:form>

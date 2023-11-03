@@ -1,7 +1,10 @@
 package com.insurance.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,7 +36,8 @@ public class Application {
 	
 	private String zipcode;
 	
-	private Date dateOfBirth;
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
+	private LocalDate dateOfBirth;
 	
 	private String gender;
 	
@@ -54,15 +58,18 @@ public class Application {
 	//private List<String> plans;
 	
 	private String plans;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
+	private LocalDate submittedDate;
 
 	public Application() {
 		super();
 	}
 
 	public Application(Long applicationId, String status, String username, String firstName, String lastName,
-			String addressLine, String city, String county, String zipcode, Date dateOfBirth, String gender,
+			String addressLine, String city, String county, String zipcode, LocalDate dateOfBirth, String gender,
 			String licenseNo, String ssn, String vin, int carYear, String carMake, String carModel, int carMileage,
-			String plans) {
+			String plans, LocalDate submittedDate) {
 		super();
 		this.applicationId = applicationId;
 		this.status = status;
@@ -83,9 +90,8 @@ public class Application {
 		this.carModel = carModel;
 		this.carMileage = carMileage;
 		this.plans = plans;
+		this.submittedDate = submittedDate;
 	}
-
-
 
 	public Long getApplicationId() {
 		return applicationId;
@@ -94,7 +100,7 @@ public class Application {
 	public void setApplicationId(Long applicationId) {
 		this.applicationId = applicationId;
 	}
-	
+
 	public String getStatus() {
 		return status;
 	}
@@ -102,7 +108,7 @@ public class Application {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -110,7 +116,6 @@ public class Application {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
 
 	public String getFirstName() {
 		return firstName;
@@ -160,11 +165,11 @@ public class Application {
 		this.zipcode = zipcode;
 	}
 
-	public Date getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
@@ -238,6 +243,14 @@ public class Application {
 
 	public void setPlans(String plans) {
 		this.plans = plans;
+	}
+
+	public LocalDate getSubmittedDate() {
+		return submittedDate;
+	}
+
+	public void setSubmittedDate(LocalDate submittedDate) {
+		this.submittedDate = submittedDate;
 	}
 	
 	

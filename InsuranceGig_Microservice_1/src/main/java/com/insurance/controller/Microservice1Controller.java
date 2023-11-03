@@ -2,8 +2,12 @@ package com.insurance.controller;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.insurance.domain.Application;
 import com.insurance.domain.DriversLicense;
 import com.insurance.domain.PaymentInfo;
@@ -107,4 +112,47 @@ public class Microservice1Controller {
 		
 		return applicationService.findApplicationByUsername(username);
 	}
+	
+	@GetMapping(value="/findApplicationById/{applicationId}")
+	public ResponseEntity<?> findApplicationById(@PathVariable Long applicationId) {
+		System.out.println("fetching application...");
+		
+		Application existingApplication = applicationService.findApplicationById(applicationId);
+		
+		if (existingApplication != null) {
+			return new ResponseEntity<>(existingApplication, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping(value="/findAllApplications")
+	public List<Application> findAllApplications() {
+		return applicationService.findAll();
+	}
+	
+	@PostMapping(value="/updateApplicationStatus")
+	public ResponseEntity<?> updateApplicationStatus(@RequestBody Map<String, String> payload) {
+	    System.out.println("Received a request to update application status.");
+	    System.out.println("Payload: " + payload.toString());
+
+	    String applicationIdString = payload.get("applicationId");
+	    String status = payload.get("status");
+
+	    try {
+	        Long applicationId = Long.parseLong(applicationIdString);
+
+	        Application existingApplication = applicationService.findApplicationById(applicationId);
+	        if (existingApplication != null) {
+	            existingApplication.setStatus(status);
+	            Application updatedApplication = applicationService.save(existingApplication);
+	            return new ResponseEntity<>(updatedApplication, HttpStatus.OK);
+	        }
+	    } catch (NumberFormatException e) {
+	        System.err.println("Error parsing applicationId: " + e.getMessage());
+	    }
+
+	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+
 }

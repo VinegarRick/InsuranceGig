@@ -33,6 +33,8 @@ public class Policy {
     private Date endDate;
     
     private int faultRecord;
+    
+    private String status; // need to add to getters/setters/constructor
 
     //@OneToMany(mappedBy = "policy", cascade = CascadeType.ALL)
     @ManyToMany

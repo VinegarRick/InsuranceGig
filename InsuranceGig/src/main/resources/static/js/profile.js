@@ -143,39 +143,47 @@ $(document).ready(function () {
 	        type: "GET",
 	        url: "http://localhost:8282/findApplicationByUsername",
 	        success: function (data) {
-	            var status = data.status;
-	
-	            if (status == "pending") {
-					//$("#statusLabel").text("Application Status: PENDING");
-					$("#statusLabel").text("PENDING")
-					$("#statusLabel").addClass("pending");
-					$("#applicationActions").text("No action is necessary yet.");
-				} else if (status == "approved") {
-					$("#statusLabel").text("APPROVED");
-					//$("#applicationActions").text("Please fill out the required information below.");
-					$("#statusLabel").addClass("approved");
-					
-				    $.ajax({
-				        type: "GET",
-				        url: "http://localhost:8282/findDriversLicenseByUsername",
-				        success: function (data) {
-							if (data == null) {
-								$("#applicationActions").text("Please fill out the required information below.");
-								$("#driverLicenseForm").show();
-							} else {
-								$("#applicationActions").text("You will get an email within 3 days notifying when you can make your first payment after your policy has been assigned.");
-							}
-				        },
-				        error: function () {
-				            console.log("Error fetching driver's license");
-				        }
-				    });
-					
-					//$("#driverLicenseForm").show();
-				} else {
-					$("#statusLabel").text("DENIED");
-					$("#applicationActions").text("Your application has been denied.");
+				
+				if (data == null) {
+					$("#statusLabel").text("N/A");
 					$("#statusLabel").addClass("denied");
+					$("#applicationActions").text("Please submit an application first.");
+				} else {
+				
+		            var status = data.status;
+		
+		            if (status == "pending") {
+						//$("#statusLabel").text("Application Status: PENDING");
+						$("#statusLabel").text("PENDING")
+						$("#statusLabel").addClass("pending");
+						$("#applicationActions").text("No action is necessary yet.");
+					} else if (status == "approved") {
+						$("#statusLabel").text("APPROVED");
+						//$("#applicationActions").text("Please fill out the required information below.");
+						$("#statusLabel").addClass("approved");
+						
+					    $.ajax({
+					        type: "GET",
+					        url: "http://localhost:8282/findDriversLicenseByUsername",
+					        success: function (data) {
+								if (data == null) {
+									$("#applicationActions").text("Please fill out the required information below.");
+									$("#driverLicenseForm").show();
+								} else {
+									$("#applicationActions").text("You will get an email within 3 days notifying when you can make your first payment after your policy has been assigned.");
+								}
+					        },
+					        error: function () {
+					            console.log("Error fetching driver's license");
+					        }
+					    });
+						
+						//$("#driverLicenseForm").show();
+					} else {
+						$("#statusLabel").text("DENIED");
+						$("#applicationActions").text("Your application has been denied.");
+						$("#statusLabel").addClass("denied");
+					}
 				}
 				
 	        },
