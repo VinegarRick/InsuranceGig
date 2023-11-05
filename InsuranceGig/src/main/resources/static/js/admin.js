@@ -50,8 +50,51 @@ $(document).ready(function () {
 	                        url: "http://localhost:8282/updateApplicationStatus",
 	                        data: JSON.stringify(payload),
 	                        contentType: "application/json",
-	                        success: function (response) {
-	                            console.log('Success: ', response);
+	                        success: function (application) {
+	                            console.log('Success: ', application);
+	
+								vehicleInfo = {
+									username : application.username,
+									vin : application.vin,
+									make : application.carMake,
+									model : application.carModel,
+									year : application.carYear, 
+									mileage : application.carMileage, 
+								}
+	
+								$.ajax({
+			                        type: "POST",
+			                        url: "http://localhost:8282/saveVehicle",
+			                        data: JSON.stringify(vehicleInfo),
+			                        contentType: "application/json",
+			                        success: function (response) {
+			                            console.log('Success: ', response);
+			                           
+			                        },
+			                        error: function (error) {
+			                            console.error('Error: ', error);
+			                        }
+			                    });
+			                            
+			                    policyInfo = {
+									username : application.username,
+									plans : application.plans,
+									dob : application.dateOfBirth
+								}
+			                            
+			                    $.ajax({
+			                        type: "POST",
+			                        url: "http://localhost:8282/savePolicy",
+			                        data: JSON.stringify(policyInfo),
+			                        contentType: "application/json",
+			                        success: function (response) {
+			                            console.log('Success: ', response);
+			
+			                        },
+			                        error: function (error) {
+			                            console.error('Error: ', error);
+			                        }
+			                    });
 	
 	                            if (response != null) {
 					               	row.find('a.approve-link').remove(); 
@@ -64,6 +107,7 @@ $(document).ready(function () {
 	                            console.error('Error: ', error);
 	                        }
 	                    });
+	                   
 	                });
 	
 	                declineLink.click(function () {

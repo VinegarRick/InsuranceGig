@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.insurance.component.ApplicationComponent;
 import com.insurance.component.EmailComponent;
+import com.insurance.component.PolicyComponent;
 import com.insurance.component.ProfileComponent;
+import com.insurance.component.VehicleComponent;
 import com.insurance.domain.Role;
 import com.insurance.domain.User;
 import com.insurance.service.RoleService;
@@ -40,6 +43,8 @@ public class GatewayController {
 	@Autowired ApplicationComponent applicationComponent;
 	@Autowired EmailComponent emailComponent;
 	@Autowired ProfileComponent profileComponent;
+	@Autowired VehicleComponent vehicleComponent;
+	@Autowired PolicyComponent policyComponent;
 	@Autowired UserService userService;
 	@Autowired RoleService roleService;
 	@Autowired PasswordEncoder passwordEncoder;
@@ -133,8 +138,6 @@ public class GatewayController {
 	    ResponseEntity<?> response = applicationComponent.updateApplicationStatus(payload);
 	    return response;
 	}
-
-
 	
 	@PostMapping(value="/registerUser")
 	public User registerUser(@RequestBody JsonNode payload) {
@@ -153,5 +156,25 @@ public class GatewayController {
 		User user = userService.save(newUser);
 		
 		return user;
+	}
+	
+	@PostMapping(value="/saveVehicle")
+	public ResponseEntity<?> saveVehicle(@RequestBody JsonNode payload) {
+		return vehicleComponent.saveVehicle(payload);
+	}
+	
+	@GetMapping(value="/getCarMakes")
+	public ResponseEntity<?> getCarMakes() {
+		return vehicleComponent.getCarMakes();
+	}
+	
+	@GetMapping("/getCarModels")
+	public ResponseEntity<?> getCarModels(@RequestParam("make") String make) {
+	    return vehicleComponent.getCarModelsByMake(make);
+	}
+
+	@PostMapping("/savePolicy")
+	public ResponseEntity<?> savePolicy(@RequestBody Map<String, String> payload) {
+		return policyComponent.savePolicy(payload);
 	}
 }

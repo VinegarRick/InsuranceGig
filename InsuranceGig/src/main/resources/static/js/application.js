@@ -1,4 +1,68 @@
 $(document).ready(function () {
+
+	function populateCarMakes() {
+	    $.ajax({
+	        type: "GET",
+	        url: "http://localhost:8282/getCarMakes",
+	        success: function (data) {
+	            var carMakeDropdown = $("#carMake");
+
+	            carMakeDropdown.empty();
+	
+	            carMakeDropdown.append($('<option>', {
+	                value: "",
+	                text: "Select Car Make"
+	            }));
+	
+	            $.each(data, function (key, value) {
+	                carMakeDropdown.append($('<option>', {
+	                    value: value,
+	                    text: value
+	                }));
+	            });
+	        },
+	        error: function (error) {
+	            console.error('Error: ', error);
+	        }
+	    });
+	}
+	
+	function populateCarModels(selectedMake) {
+	    $.ajax({
+	        type: "GET",
+	        url: "http://localhost:8282/getCarModels?make=" + selectedMake, 
+	        success: function (data) {
+	            var carModelDropdown = $("#carModel");
+	
+	            carModelDropdown.empty();
+	
+	            carModelDropdown.append($('<option>', {
+	                value: "",
+	                text: "Select Car Model"
+	            }));
+	
+	            $.each(data, function (key, value) {
+	                carModelDropdown.append($('<option>', {
+	                    value: value,
+	                    text: value
+	                }));
+	            });
+	        },
+	        error: function (error) {
+	            console.error('Error: ', error);
+	        }
+	    });
+	}
+	
+	populateCarMakes();
+	
+	$("#carMake").change(function () {
+	    var selectedMake = $(this).val();
+	    if (selectedMake !== "") {
+	        populateCarModels(selectedMake);
+	    }
+	});
+	
     $('#application-submit-button').click(function (e) {
         e.preventDefault();
 

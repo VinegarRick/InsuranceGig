@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,6 +24,11 @@ public class Vehicle {
     private String year;
     
     private Integer mileage;
+    
+    /*@OneToOne
+    private Policy policy;*/
+    
+    private String username;
 
     //@OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
     //private List<Claim> claims = new ArrayList<>();
@@ -31,7 +37,7 @@ public class Vehicle {
 		super();
 	}
 
-	public Vehicle(Long id, String vin, String make, String model, String year, Integer mileage) {
+	public Vehicle(Long id, String vin, String make, String model, String year, Integer mileage, String username) {
 		super();
 		this.id = id;
 		this.vin = vin;
@@ -39,6 +45,7 @@ public class Vehicle {
 		this.model = model;
 		this.year = year;
 		this.mileage = mileage;
+		this.username = username;
 	}
 
 	public Long getId() {
@@ -87,6 +94,14 @@ public class Vehicle {
 
 	public void setMileage(Integer mileage) {
 		this.mileage = mileage;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
     

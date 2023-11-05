@@ -144,7 +144,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <!--<div class="row">
                     <div class="col-sm-6 col-md-6 col-lg-6 form-group">
                         <label for="carMake">Make of Car:</label>
                         <input type="text" id="carMake" name="carMake" class="form-control short-input" required>
@@ -153,7 +153,23 @@
                         <label for="carModel">Model of Car:</label>
                         <input type="text" id="carModel" name="carModel" class="form-control short-input" required>
                     </div>
+                </div>-->
+
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6 form-group">
+                        <label for="carMake">Make of Car:</label>
+                        <select id="carMake" name="carMake" class="form-control short-input" required>
+                            <option value="" disabled selected>Select Car Make</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 form-group">
+                        <label for="carModel">Model of Car:</label>
+                        <select id="carModel" name="carModel" class="form-control short-input" required>
+                            <option value="" disabled selected>Select Car Model</option>
+                        </select>
+                    </div>
                 </div>
+                
 
                 <div class="row">
                     <div class="col-sm-6 col-md-6 col-lg-6 form-group">

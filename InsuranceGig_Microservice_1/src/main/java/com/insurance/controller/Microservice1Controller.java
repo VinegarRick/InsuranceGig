@@ -1,6 +1,10 @@
 package com.insurance.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Year;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -16,13 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.insurance.domain.Application;
 import com.insurance.domain.DriversLicense;
 import com.insurance.domain.PaymentInfo;
+import com.insurance.domain.Policy;
+import com.insurance.domain.Vehicle;
 import com.insurance.service.ApplicationService;
 import com.insurance.service.DriversLicenseService;
 import com.insurance.service.PaymentInfoService;
+import com.insurance.service.VehicleService;
+import com.insurance.service.VehicleTemplateService;
 
 @RestController
 public class Microservice1Controller {
@@ -30,6 +37,8 @@ public class Microservice1Controller {
 	@Autowired ApplicationService applicationService;
 	@Autowired PaymentInfoService paymentInfoService;
 	@Autowired DriversLicenseService driversLicenseService;
+	@Autowired VehicleService vehicleService;
+	@Autowired VehicleTemplateService vehicleTemplateService;
 	
 	@PostMapping(value="/saveApplication")
 	public Application saveApplication(@RequestBody Application application) {
@@ -153,6 +162,94 @@ public class Microservice1Controller {
 	    }
 
 	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
+	@PostMapping(value="/saveVehicle")
+	public ResponseEntity<?> updateVehicle(@RequestBody Vehicle vehicle) {
+		Vehicle myVehicle = vehicleService.save(vehicle);
+		
+		if (myVehicle != null) {
+			return new ResponseEntity<>(myVehicle, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping(value="/getCarMakes")
+	public ResponseEntity<?> getCarMakes() {
+		List<String> carMakes = vehicleTemplateService.getCarMakes();
+		
+		if (!carMakes.isEmpty()) {
+			return new ResponseEntity<>(carMakes, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping(value="/getCarModelsByMake/{make}")
+	public ResponseEntity<?> getCarModelsByMake(@PathVariable String make) {
+		List<String> carModels = vehicleTemplateService.getCarModelsByMake(make);
+		
+		if (!carModels.isEmpty()) {
+			return new ResponseEntity<>(carModels, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	/*@PostMapping(value="/savePolicy")
+	public ResponseEntity<?> savePolicy(@RequestBody Map<String, String> payload) {
+		String username = payload.get("username");
+		String plans = payload.get("plans");
+		String dobString = payload.get("dob");
+				
+		double carValuation = calculateCarValuation(username);
+		
+		int personAge;
+		try {
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	        Date dob = dateFormat.parse(dobString);
+	
+	        Calendar dobCalendar = Calendar.getInstance();
+	        dobCalendar.setTime(dob);
+	
+	        Calendar currentCalendar = Calendar.getInstance();
+	
+	        personAge = currentCalendar.get(Calendar.YEAR) - dobCalendar.get(Calendar.YEAR);
+		} catch (ParseException e) {
+			System.out.println("Invalid date format: " + e.getMessage());
+		}
+		
+		String[] coverages = plans.split(",\\s*");
+		for (String coverage : coverages) {
+			
+		}
+		
+		Policy policy = new Policy();
+		
+		return new ResponseEntity<>(policy, HttpStatus.OK);
+	}*/
+	
+	double calculateCarValuation(String username) {
+		Vehicle vehicle = vehicleService.findVehicleByUsername(username);
+		int carYear = Integer.parseInt(vehicle.getYear());
+		int currYear = Year.now().getValue();
+		int carMileage = vehicle.getMileage();
+		int baseValuation = vehicleTemplateService.getBaseValuation(vehicle.getMake(), vehicle.getModel());
+		
+		double annualDepreciationRate = 15.0;
+		double mileageDepreciationRate = 0.001;
+		
+		int carAge = currYear - carYear;
+		double depreciatedValue = baseValuation;
+        for (int i = 0; i < carAge; i++) {
+            depreciatedValue *= (1 - annualDepreciationRate / 100);
+        }
+        
+        double mileageDepreciation = carMileage * mileageDepreciationRate;
+        double carValuation = depreciatedValue - mileageDepreciation;
+        
+        return carValuation;
 	}
 
 }
