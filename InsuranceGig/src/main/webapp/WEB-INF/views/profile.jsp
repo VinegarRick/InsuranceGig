@@ -57,7 +57,8 @@
         }
 
         #driverLicenseForm,
-        #schedulePaymentForm {
+        #schedulePaymentForm,
+        #fileClaimForm {
             text-align: center;
         }
 
@@ -65,6 +66,13 @@
             /*text-align: right;*/
             display: inline-block;
             width: 220px; 
+            /*padding-right: 10px;*/
+        }
+
+        #fileClaimForm label {
+            /*text-align: right;*/
+            display: inline-block;
+            width: 150px; 
             /*padding-right: 10px;*/
         }
 
@@ -77,6 +85,28 @@
         #driverLicenseForm input[type="file"],
         #driverLicenseForm select {
             max-width: 190px;
+            text-align: left; 
+            display: inline-block;
+            padding-left: 5px;
+        }
+
+        #fileClaimForm input[type="text"],
+        #fileClaimForm select {
+            max-width: 125px;
+            text-align: left; 
+            display: inline-block;
+            padding-left: 5px;
+        }
+
+        #fileClaimForm input[type="file"] {
+            max-width: 300px;
+            text-align: left; 
+            display: inline-block;
+            padding-left: 5px;
+        }
+
+        #fileClaimForm textarea {
+            max-width: 400px;
             text-align: left; 
             display: inline-block;
             padding-left: 5px;
@@ -95,7 +125,7 @@
 
         #statusLabel.pending {
             font-size: 24px;
-            color: yellow; 
+            color: rgb(163, 163, 25); 
         }
 
         #statusLabel.approved {
@@ -145,11 +175,35 @@
         </div>
     
         <div id="policyInfo" class="text-center">
-            test
+            <h3>Policy Info</h3>
+            <p id="applicationStatusLabel">Status: </p>
+            <p id="startDateLabel">Start Date: </p>
+            <p id="endDateLabel">End Date: </p>
+            <p id="plansList">Coverage Plans: </p>
+            <p id="totalPremiumLabel">Total Premium: </p>
         </div>
 
         <div id="fileClaim" class="text-center">
-            test
+            <h3><b>File a Claim</b></h3><br>
+
+            <form id="fileClaimForm" enctype="multipart/form-data">
+                <label for="accidentDateLabel">Accident Date:</label>
+                <input type="date" id="accidentDate" name="accidentDate"><br><br>
+        
+                <label for="accidentLocationLabel">Accident Location:</label>
+                <input type="text" id="accidentLocation" name="accidentLocation"><br><br>
+        
+                <label for="repairPriceLabel">Repair Price:</label>
+                <input type="number" id="repairPrice" name="repairPrice"><br><br><br>
+
+                <label for="descriptionLabel">Description:</label><br><br>
+                <textarea id="description" name="description"></textarea><br><br><br>
+        
+                <label for="imagesLabel">Upload Images:</label><br>
+                <input type="file" id="claimImages" name="claimImages" accept="image/*" multiple><br><br><br>
+        
+                <input type="submit" value="Submit Claim">
+            </form>
         </div>
 
         <div id="schedulePayment" class="text-center">

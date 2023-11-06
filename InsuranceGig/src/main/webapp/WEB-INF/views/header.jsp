@@ -71,7 +71,7 @@
                             <c:otherwise>
                                 <a href="/login">Log In</a>
                                 <li>
-                                    <a href="#">Sign Up</a>
+                                    <a href="/registerForm">Sign Up</a>
                                 </li>
                             </c:otherwise>
                         </c:choose>

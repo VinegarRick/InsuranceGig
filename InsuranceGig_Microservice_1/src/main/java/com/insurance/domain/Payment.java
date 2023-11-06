@@ -1,6 +1,9 @@
 package com.insurance.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
@@ -18,12 +21,15 @@ public class Payment {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int paymentId;
+	private Long paymentId;
 	private double amount;
-	private Date insuranceStateDate;
-	private Date insuranceEndDate;
-	private Date payDate;
-	private String status;
+	//private Date insuranceStateDate;
+	//private Date insuranceEndDate;
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
+	private LocalDate submittedDate;
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
+	private LocalDate scheduledDate;
+	//private String status;
 	private String paymentMethod;
 	private String bankAccountNo;
 	private String routingNo;
@@ -33,27 +39,25 @@ public class Payment {
 	private String cvv;
 	private String nameOnCard;
 	private String nameOnAccount;
+	private String username;
 	
 	//@OneToOne(cascade = CascadeType.ALL)
 	//@JoinColumn(name = "addressId")
-	@Embedded
-	private Address billingAddress;
+	//@Embedded
+	//private Address billingAddress;
 	
 	public Payment() {
 		super();
 	}
 
-	public Payment(int paymentId, double amount, Date insuranceStateDate, Date insuranceEndDate, Date payDate,
-			String status, String paymentMethod, String bankAccountNo, String routingNo, String accountType,
-			String cardNo, String expiryDate, String cvv, String nameOnCard, String nameOnAccount,
-			Address billingAddress) {
+	public Payment(Long paymentId, double amount, LocalDate submittedDate, LocalDate scheduledDate,
+			String paymentMethod, String bankAccountNo, String routingNo, String accountType, String cardNo,
+			String expiryDate, String cvv, String nameOnCard, String nameOnAccount, String username) {
 		super();
 		this.paymentId = paymentId;
 		this.amount = amount;
-		this.insuranceStateDate = insuranceStateDate;
-		this.insuranceEndDate = insuranceEndDate;
-		this.payDate = payDate;
-		this.status = status;
+		this.submittedDate = submittedDate;
+		this.scheduledDate = scheduledDate;
 		this.paymentMethod = paymentMethod;
 		this.bankAccountNo = bankAccountNo;
 		this.routingNo = routingNo;
@@ -63,14 +67,14 @@ public class Payment {
 		this.cvv = cvv;
 		this.nameOnCard = nameOnCard;
 		this.nameOnAccount = nameOnAccount;
-		this.billingAddress = billingAddress;
+		this.username = username;
 	}
 
-	public int getPaymentId() {
+	public Long getPaymentId() {
 		return paymentId;
 	}
 
-	public void setPaymentId(int paymentId) {
+	public void setPaymentId(Long paymentId) {
 		this.paymentId = paymentId;
 	}
 
@@ -82,36 +86,20 @@ public class Payment {
 		this.amount = amount;
 	}
 
-	public Date getInsuranceStateDate() {
-		return insuranceStateDate;
+	public LocalDate getSubmittedDate() {
+		return submittedDate;
 	}
 
-	public void setInsuranceStateDate(Date insuranceStateDate) {
-		this.insuranceStateDate = insuranceStateDate;
+	public void setSubmittedDate(LocalDate submittedDate) {
+		this.submittedDate = submittedDate;
 	}
 
-	public Date getInsuranceEndDate() {
-		return insuranceEndDate;
+	public LocalDate getScheduledDate() {
+		return scheduledDate;
 	}
 
-	public void setInsuranceEndDate(Date insuranceEndDate) {
-		this.insuranceEndDate = insuranceEndDate;
-	}
-
-	public Date getPayDate() {
-		return payDate;
-	}
-
-	public void setPayDate(Date payDate) {
-		this.payDate = payDate;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
+	public void setScheduledDate(LocalDate scheduledDate) {
+		this.scheduledDate = scheduledDate;
 	}
 
 	public String getPaymentMethod() {
@@ -186,14 +174,14 @@ public class Payment {
 		this.nameOnAccount = nameOnAccount;
 	}
 
-	public Address getBillingAddress() {
-		return billingAddress;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setBillingAddress(Address billingAddress) {
-		this.billingAddress = billingAddress;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	
+
 	
 	
 }

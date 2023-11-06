@@ -39,4 +39,18 @@ public class PolicyComponent {
 
 	    return new ResponseEntity<>(returnObj, responseEntity.getHeaders(), responseEntity.getStatusCode());
 	}
+	
+	public ResponseEntity<JsonNode> findPolicy(String username) {
+		System.out.println("inside findPolicy in PolicyComponent");
+		
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<Object> responseEntity = restTemplate.getForEntity("http://localhost:8383/findPolicyByUsername/" + username, Object.class);
+		Object objects = responseEntity.getBody();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode returnObj = mapper.convertValue(objects, JsonNode.class);
+		
+		return new ResponseEntity<>(returnObj, responseEntity.getHeaders(), responseEntity.getStatusCode());	
+	}
+	
 }

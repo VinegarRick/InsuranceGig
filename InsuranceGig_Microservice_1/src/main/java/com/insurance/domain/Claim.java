@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,15 +24,18 @@ public class Claim {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
     private LocalDate accidentDate;
+    
+    private String accidentLocation;
     
     private String description;
     
     private String status;
     
     private double repairPrice;
-    
-    private String phone;
+        
+    private String username;
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "vehicle_id")
@@ -44,15 +49,16 @@ public class Claim {
 		super();
 	}
 
-	public Claim(Long id, LocalDate accidentDate, String description, String status, double repairPrice, String phone,
-			Vehicle vehicle, List<ClaimImage> images) {
+	public Claim(Long id, LocalDate accidentDate, String accidentLocation, String description, String status,
+			double repairPrice, String username, Vehicle vehicle, List<ClaimImage> images) {
 		super();
 		this.id = id;
 		this.accidentDate = accidentDate;
+		this.accidentLocation = accidentLocation;
 		this.description = description;
 		this.status = status;
 		this.repairPrice = repairPrice;
-		this.phone = phone;
+		this.username = username;
 		this.vehicle = vehicle;
 		this.images = images;
 	}
@@ -71,6 +77,14 @@ public class Claim {
 
 	public void setAccidentDate(LocalDate accidentDate) {
 		this.accidentDate = accidentDate;
+	}
+
+	public String getAccidentLocation() {
+		return accidentLocation;
+	}
+
+	public void setAccidentLocation(String accidentLocation) {
+		this.accidentLocation = accidentLocation;
 	}
 
 	public String getDescription() {
@@ -97,12 +111,12 @@ public class Claim {
 		this.repairPrice = repairPrice;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public Vehicle getVehicle() {
@@ -120,6 +134,6 @@ public class Claim {
 	public void setImages(List<ClaimImage> images) {
 		this.images = images;
 	}
-    
+
     
 }

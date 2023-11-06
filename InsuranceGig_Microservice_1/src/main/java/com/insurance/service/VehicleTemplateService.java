@@ -38,8 +38,14 @@ public class VehicleTemplateService {
 		return carModels;
 	}
 	
-	public int getBaseValuation(String make, String model) {
+	public Integer getBaseValuation(String make, String model) {
+		System.out.println("inside getBaseValuation of VehicleTemplateService");
 		VehicleTemplate vehicleTemplate = vehicleTemplateRepository.findByMakeAndModel(make, model);
+		
+		if (vehicleTemplate == null) {
+			return 0;
+		}
+		
 		return vehicleTemplate.getBaseValuation();
 	}
 }

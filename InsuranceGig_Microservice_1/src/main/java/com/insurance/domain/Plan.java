@@ -22,16 +22,18 @@ public class Plan {
 
     private String name;
 
-    private Double premium;
+    private double premium;
     
-    private Integer numClaims;
+    private int numClaims;
 
     private String username;
     
     @ManyToOne
     private PlanTemplate plantemplate;
     
+    
     @ManyToOne
+    @JsonBackReference
     private Policy policy;
     
 	public Plan() {

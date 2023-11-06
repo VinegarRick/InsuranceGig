@@ -49,6 +49,41 @@ $(document).ready(function () {
 		
 		$(".profile-nav-link").removeClass("active-link");
 		$(this).addClass("active-link");
+		
+	    $.ajax({
+	        type: "GET",
+	        url: "http://localhost:8282/getPolicy",
+	        success: function (data) {
+	            if (data != null) {
+					var startDate = data.startDate;
+					if (startDate == null) startDate = "N/A";
+					var endDate = data.endDate;
+					if (endDate == null) endDate = "N/A";
+	                $("#applicationStatusLabel").html("<strong>Status:</strong> " + data.status.toUpperCase());
+	                $("#startDateLabel").html("<strong>Start Date:</strong> " + startDate);
+	                $("#endDateLabel").html("<strong>End Date:</strong> " + endDate);
+	
+	                var plansList = data.plans;
+	                var plansHtml = "<ul>";
+	                for (var i = 0; i < plansList.length; i++) {
+	                    plansHtml += "<li>" + plansList[i].name + "</li>";
+	                }
+	                plansHtml += "</ul>";
+	                $("#plansList").html("<strong>Coverage Plans:</strong>" + plansHtml);
+	                var roundedTotalPremium = data.totalPremium.toFixed(0);
+	                $("#totalPremiumLabel").html("<strong>Total Premium:</strong> $" + roundedTotalPremium);
+	            } else {
+	                $("#applicationStatusLabel").text("No policy found for this user.");
+	                $("#startDateLabel").text("N/A");
+	                $("#endDateLabel").text("N/A");
+	                $("#totalPremiumLabel").text("N/A");
+	                $("#plansList").html("N/A");
+	            }
+	        },
+	        error: function () {
+	            console.log("Error fetching policy data");
+	        }
+	    });
 	})
 	
 	$("#fileClaimLink").click(function() {
@@ -61,7 +96,55 @@ $(document).ready(function () {
 		
 		$(".profile-nav-link").removeClass("active-link");
 		$(this).addClass("active-link");
+		
 	})
+	
+	$("#fileClaimForm").submit(function (event) {
+	    event.preventDefault();
+	
+	    var accidentDate = $("#accidentDate").val();
+	    var accidentLocation = $("#accidentLocation").val();
+	    var repairPrice = $("#repairPrice").val();
+	    var description = $("#description").val();
+	    var claimImages = $("#claimImages")[0].files;
+	
+	    if (accidentDate === "" || accidentLocation === "" || repairPrice === "" || description === "" || claimImages.length === 0) {
+	        alert("Please fill out all required fields and upload at least one image.");
+	        return;
+	    }
+	
+	    var formData = new FormData();
+	    formData.append("accidentDate", accidentDate);
+	    formData.append("accidentLocation", accidentLocation);
+	    formData.append("repairPrice", repairPrice);
+	    formData.append("description", description);
+	    formData.append("username", username);
+	
+	    for (var i = 0; i < claimImages.length; i++) {
+	        formData.append("claimImages", claimImages[i]);
+	    }
+	
+	    $.ajax({
+	        type: "POST",
+	        url: "http://localhost:8282/fileClaim",
+	        data: formData,
+	        contentType: false,
+	        processData: false,
+	        success: function (response) {
+	            console.log('Success: ', response);
+	            alert("Claim submitted!");
+	
+	            $("#accidentDate").val("");
+	            $("#accidentLocation").val("");
+	            $("#repairPrice").val("");
+	            $("#description").val("");
+	            $("#claimImages").val(""); 
+	        },
+	        error: function (error) {
+	            console.error('Error: ', error);
+	        }
+	    });
+	});
 	
 	$("#schedulePaymentLink").click(function() {
 		$("#userInfo").hide();
@@ -89,6 +172,64 @@ $(document).ready(function () {
 	        }
 	    });
 	})
+	
+    $("#schedulePaymentDetailsForm").submit(function (event) {
+        event.preventDefault(); 
+
+        var paymentAmount = $("#paymentAmount").val();
+        var paymentOption = $("#paymentOption").val();
+        var paymentDate = $("#paymentDate").val();
+
+	    $.ajax({
+	        type: "GET",
+	        url: "http://localhost:8282/findPaymentInfoByUsername",
+	        success: function (paymentInfo) {
+				
+			var currentDate = new Date();
+			var formattedCurrentDate = currentDate.toISOString().split('T')[0];
+				
+	        var formData = {
+	            amount : paymentAmount,
+	            paymentMethod : paymentOption,
+	            scheduledDate : paymentDate,
+	            username : username, 
+	            submittedDate : formattedCurrentDate, 
+	            bankAccountNo : paymentInfo.accountNo,
+	            routingNo : paymentInfo.routingNo,
+	            accountType : paymentInfo.accountType,
+	            cardNo : paymentInfo.cardNo,
+	            expiryDate : paymentInfo.expirationDate,
+	            cvv : paymentInfo.cvv,
+	            nameOnCard : paymentInfo.nameOnCard, 
+	            nameOnAccount : paymentInfo.nameOnoAccount
+	        };
+	
+	        $.ajax({
+	            type: "POST",
+	            url: "http://localhost:8282/savePayment",
+	            data: JSON.stringify(formData),
+	            contentType: "application/json",
+	            dataType: "json",
+	            success: function (response) {
+	                console.log('Success: ', response);
+	                
+	                alert("Payment submitted!");
+	                
+                    $("#paymentAmount").val('');
+                    $("#paymentOption").val('');
+                    $("#paymentDate").val('');
+	            },
+	            error: function (error) {
+	                console.error('Error: ', error);
+	            }
+	        });
+				
+			},
+			error: function () {
+	            console.log("Error fetching payment info");
+	        }
+	    });
+    });
 	
 	$("#paymentInfoLink").click(function() {
 		$("#userInfo").hide();
@@ -194,7 +335,7 @@ $(document).ready(function () {
 	})
 	
     $("#driverLicenseDetailsForm").submit(function (event) {
-        event.preventDefault();
+        //event.preventDefault();
 
         var licenseNumber = $("#licenseNumber").val();
         var expirationDate = $("#expirationDate").val();

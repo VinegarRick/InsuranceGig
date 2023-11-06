@@ -23,19 +23,18 @@ public class ClaimImage {
     @Column(name = "data")
     private byte[] data;
 
-    @Transient
-    private String url;
+    //@Transient
+    //private String url;
 
 	public ClaimImage() {
 		super();
 	}
 
-	public ClaimImage(Long id, String filename, byte[] data, String url) {
+	public ClaimImage(Long id, String filename, byte[] data) {
 		super();
 		this.id = id;
 		this.filename = filename;
 		this.data = data;
-		this.url = url;
 	}
 
 	public Long getId() {
@@ -62,13 +61,6 @@ public class ClaimImage {
 		this.data = data;
 	}
 
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	} 
-    
+	
     
 }

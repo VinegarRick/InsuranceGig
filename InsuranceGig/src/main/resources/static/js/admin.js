@@ -70,33 +70,33 @@ $(document).ready(function () {
 			                        success: function (response) {
 			                            console.log('Success: ', response);
 			                           
+					                    policyInfo = {
+											username : application.username,
+											plans : application.plans,
+											dob : application.dateOfBirth
+										}
+					                            
+					                    $.ajax({
+					                        type: "POST",
+					                        url: "http://localhost:8282/savePolicy",
+					                        data: JSON.stringify(policyInfo),
+					                        contentType: "application/json",
+					                        success: function (response) {
+					                            console.log('Success: ', response);
+					
+					                        },
+					                        error: function (error) {
+					                            console.error('Error: ', error);
+					                        }
+					                    });
 			                        },
 			                        error: function (error) {
 			                            console.error('Error: ', error);
 			                        }
 			                    });
 			                            
-			                    policyInfo = {
-									username : application.username,
-									plans : application.plans,
-									dob : application.dateOfBirth
-								}
-			                            
-			                    $.ajax({
-			                        type: "POST",
-			                        url: "http://localhost:8282/savePolicy",
-			                        data: JSON.stringify(policyInfo),
-			                        contentType: "application/json",
-			                        success: function (response) {
-			                            console.log('Success: ', response);
-			
-			                        },
-			                        error: function (error) {
-			                            console.error('Error: ', error);
-			                        }
-			                    });
 	
-	                            if (response != null) {
+	                            if (application != null) {
 					               	row.find('a.approve-link').remove(); 
 					                row.find('a.decline-link').remove();
 	                                row.remove();
@@ -200,6 +200,162 @@ $(document).ready(function () {
         }
     });
 
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "http://localhost:8282/findAllClaims",
+        success: function (result) {
+            if (result == null) return;
+
+            var pendingTableBody = $("#pendingClaimsTable tbody");
+            var approvedTableBody = $("#approvedClaimsTable tbody");
+            var declinedTableBody = $("#declinedClaimsTable tbody");
+
+            pendingTableBody.empty();
+            approvedTableBody.empty();
+            declinedTableBody.empty();
+
+            $.each(result, function (key, data) {
+                var tableBody;
+                if (data.status == "pending") {
+                    tableBody = pendingTableBody;
+                } else if (data.status == "approved") {
+                    tableBody = approvedTableBody;
+                } else {
+                    tableBody = declinedTableBody;
+                }
+
+                var row = $("<tr></tr>");
+
+                row.append("<td>" + data.id + "</td>");
+                row.append("<td>" + data.accidentDate + "</td>");
+                row.append("<td>" + data.repairPrice + "</td>");
+
+                var actionCell = $("<td></td>");
+
+                if (data.status == "pending") {
+                    var approveLink = $("<a href='#' class='approve-claim-link'>Approve</a>");
+                    var declineLink = $("<a href='#' class='decline-claim-link'>Decline</a>");
+
+                    approveLink.click(function () {
+                        var row = $(this).closest('tr');
+                        var claimId = row.find('td:eq(0)').text();
+
+                        payload = {
+                            id: claimId,
+                            status: "approved"
+                        }
+
+                        $.ajax({
+                            type: "POST",
+                            url: "http://localhost:8282/updateClaimStatus",
+                            data: JSON.stringify(payload),
+                            contentType: "application/json",
+                            success: function (claim) {
+                                console.log('Success: ', claim);
+
+                                if (claim != null) {
+                                    row.find('a.approve-claim-link').remove();
+                                    row.find('a.decline-claim-link').remove();
+                                    row.remove();
+                                    $("#approvedClaimsTable tbody").append(row);
+                                }
+                            },
+                            error: function (error) {
+                                console.error('Error: ', error);
+                            }
+                        });
+                    });
+
+                    declineLink.click(function () {
+                        var row = $(this).closest('tr');
+                        var claimId = row.find('td:eq(0)').text();
+
+                        payload = {
+                            id: claimId,
+                            status: "declined"
+                        }
+
+                        $.ajax({
+                            type: "POST",
+                            url: "http://localhost:8282/updateClaimStatus",
+                            data: JSON.stringify(payload),
+                            contentType: "application/json",
+                            success: function (response) {
+                                console.log('Success: ', response);
+
+                                if (response != null) {
+                                    row.find('a.approve-claim-link').remove();
+                                    row.find('a.decline-claim-link').remove();
+                                    row.remove();
+                                    $("#declinedClaimsTable tbody").append(row);
+                                }
+                            },
+                            error: function (error) {
+                                console.error('Error: ', error);
+                            }
+                        });
+                    });
+
+                    actionCell.append(approveLink);
+                    actionCell.append(" | ");
+                    actionCell.append(declineLink);
+                    actionCell.append(" | ");
+                }
+
+                var detailsLink = $("<a href='#' class='details-claim-link'>Details</a>");
+
+                detailsLink.click(function () {
+                    var row = $(this).closest('tr');
+                    var claimId = row.find('td:eq(0)').text();
+
+                    $.ajax({
+                        type: "GET",
+                        contentType: "application/json",
+                        url: "http://localhost:8282/findClaimById/" + claimId,
+                        success: function (result) {
+                            var modalBody = $('#claimDetailsModal .modal-body');
+                            modalBody.empty();
+
+				            modalBody.append('<p><strong>Claim ID:</strong> ' + claimId + '</p>');
+				            //modalBody.append('<p><strong>Username:</strong> ' + result.username + '</p>');
+				            modalBody.append('<p><strong>Accident Date:</strong> ' + result.accidentDate + '</p>');
+				            modalBody.append('<p><strong>Accident Location:</strong> ' + result.accidentLocation + '</p>');
+				            modalBody.append('<p><strong>Repair Price:</strong> ' + result.repairPrice + '</p>');
+				            modalBody.append('<p><strong>Description:</strong> ' + result.description + '</p><br>');
+
+				            if (result.images.length > 0) {
+				                //modalBody.append('<h4>Claim Images:</h4>');
+				                var imagesDiv = $('<div class="claim-images"></div>');
+				
+				                $.each(result.images, function (index, image) {
+				                    var img = $('<img class="claim-image" src="data:image/jpeg;base64,' + image.data + '" alt="' + image.filename + '">');
+				                    imagesDiv.append(img);
+				                });
+				
+				                modalBody.append(imagesDiv);
+				            }
+
+                            $('#claimDetailsModal').modal('show');
+                        },
+                        error: function () {
+                            console.log("Error fetching claim");
+                        }
+                    });
+                });
+
+                actionCell.append(detailsLink);
+                row.append(actionCell);
+
+                tableBody.append(row);
+            });
+        },
+        error: function () {
+            console.log("Error fetching claims");
+        }
+    });
+    
+
     $("#applications").show();
     $("#pendingApplications").show();
 
@@ -213,6 +369,7 @@ $(document).ready(function () {
         $("#primary-navbar a").removeClass("active-link-2");
 
         $(this).addClass("active-link-2");
+       
     });
 
     $("#applications-navbar a").click(function () {
@@ -226,4 +383,20 @@ $(document).ready(function () {
 
         $(this).addClass("active-link");
     });
+    
+    $("#claims-navbar a").click(function () {
+        var status = $(this).attr("id").replace("ClaimsLink", ""); 
+
+        $(".sub-section").hide();
+        $("#claims-navbar a").removeClass("active-link");
+
+        $("#" + status + "Claims").show();
+        $(this).addClass("active-link");
+
+        //loadClaims(status);
+    });
+    
+	$("#applicationsLink").click();
+	
+	$("#claimsLink").click();
 });

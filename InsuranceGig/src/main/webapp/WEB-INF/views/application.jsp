@@ -215,7 +215,7 @@
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="coveragePlan" id="assistance" value="assistance"> Roadside Assistance
+                                <input type="checkbox" name="coveragePlan" id="assistance" value="roadside"> Roadside Assistance
                             </label>
                         </div>
                     </div>

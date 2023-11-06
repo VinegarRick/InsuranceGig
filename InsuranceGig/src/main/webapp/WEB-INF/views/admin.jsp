@@ -95,6 +95,13 @@
             width: 25%
         }
 
+        .claim-image {
+            max-width: 100%; 
+            display: block; 
+            margin: 0 auto; 
+            margin-bottom: 10px;
+        }
+
     </style>
 </head>
 
@@ -107,7 +114,7 @@
         <div id="primary-navbar">
             <ul>
                 <li><a href="#" data-section="applications">Applications</a></li>
-                <li><a href="#" data-section="policies">Policies</a></li>
+                <!--<li><a href="#" data-section="policies">Policies</a></li>-->
                 <li><a href="#" data-section="claims">Claims</a></li>
             </ul>
         </div><br>
@@ -166,10 +173,60 @@
             
         </div>
         
-        <div id="policies" class="section" style="display: none;">
-        </div>
+        <!--<div id="policies" class="section" style="display: none;">
+        </div>-->
         
         <div id="claims" class="section" style="display: none;">
+            <div id="claims-navbar" style="text-align: center;">
+                <a href="#" id="pendingClaimsLink" class="applications-nav-link active-link">Pending Claims</a> 
+                <a href="#" id="approvedClaimsLink" class="applications-nav-link">Approved Claims</a> 
+                <a href="#" id="declinedClaimsLink" class="applications-nav-link">Declined Claims</a>
+            </div><br>
+        
+            <div id="pendingClaims" class="sub-section">
+                <table id="pendingClaimsTable" class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Claim ID</th>
+                            <th scope="col">Accident Date</th>
+                            <th scope="col">Repair Price</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pendingClaimsTblBody">
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="approvedClaims" class="sub-section" style="display: none;">
+                <table id="approvedClaimsTable" class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Claim ID</th>
+                            <th scope="col">Accident Date</th>
+                            <th scope="col">Repair Price</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="approvedClaimsTblBody">
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="declinedClaims" class="sub-section" style="display: none;">
+                <table id="declinedClaimsTable" class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Claim ID</th>
+                            <th scope="col">Accident Date</th>
+                            <th scope="col">Repair Price</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="declinedClaimsTblBody">
+                    </tbody>
+                </table>
+            </div>
         </div>
 
 
@@ -189,6 +246,21 @@
             </div>
         </div>
 
+        <div id="claimDetailsModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Claim Details</h4>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         </p></p>
 

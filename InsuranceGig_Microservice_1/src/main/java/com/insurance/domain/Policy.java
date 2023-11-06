@@ -1,6 +1,7 @@
 package com.insurance.domain;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,8 +42,9 @@ public class Policy {
     
     private String username;
     
-    @OneToMany
-    private List<Plan> plans;
+    @OneToMany(mappedBy = "policy")
+    @JsonManagedReference
+    private List<Plan> plans = new ArrayList<>();
 
     //@OneToMany(mappedBy = "policy", cascade = CascadeType.ALL)
     /*@ManyToMany

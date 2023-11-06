@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.insurance.component.ApplicationComponent;
+import com.insurance.component.ClaimComponent;
 import com.insurance.component.EmailComponent;
 import com.insurance.component.PolicyComponent;
 import com.insurance.component.ProfileComponent;
@@ -45,6 +46,7 @@ public class GatewayController {
 	@Autowired ProfileComponent profileComponent;
 	@Autowired VehicleComponent vehicleComponent;
 	@Autowired PolicyComponent policyComponent;
+	@Autowired ClaimComponent claimComponent;
 	@Autowired UserService userService;
 	@Autowired RoleService roleService;
 	@Autowired PasswordEncoder passwordEncoder;
@@ -177,4 +179,43 @@ public class GatewayController {
 	public ResponseEntity<?> savePolicy(@RequestBody Map<String, String> payload) {
 		return policyComponent.savePolicy(payload);
 	}
+	
+	@GetMapping("/getPolicy")
+	public ResponseEntity<?> getPolicy(Principal principal) {
+		return policyComponent.findPolicy(principal.getName());
+	}
+	
+	@PostMapping("/savePayment")
+	public ResponseEntity<?> savePayment(@RequestBody JsonNode payload) {
+		return profileComponent.savePayment(payload);
+	}
+	
+	@PostMapping(value = "/fileClaim")
+	public ResponseEntity<?> fileClaim(@RequestParam("claimImages") MultipartFile[] claimImages, @RequestParam("accidentDate") String accidentDate, @RequestParam("accidentLocation") String accidentLocation, @RequestParam("repairPrice") double repairPrice, @RequestParam("description") String description, @RequestParam("username") String username) throws IOException, ParseException {
+		System.out.println("inside fileClaim of GatewayController");
+		
+	    return profileComponent.fileClaim(claimImages, accidentDate, accidentLocation, repairPrice, description, username);
+	}
+	
+	@GetMapping(value="/findAllClaims")
+	public ResponseEntity<?> findAllClaims() {
+		System.out.println("inside findAllClaims of GatewayController");
+		
+		return claimComponent.findAllClaims();
+	}
+	
+	@GetMapping(value="/findClaimById/{id}")
+	public ResponseEntity<?> findClaimById(@PathVariable Long id) {
+		System.out.println("inside findClaimById of GatewayController");
+		
+		return claimComponent.findClaimById(id);
+	}
+	
+	@PostMapping(value = "/updateClaimStatus")
+	public ResponseEntity<?> updateCLaimStatus(@RequestBody Map<String, String> payload) {
+	    System.out.println("in updateClaimStatus of GatewayController");
+	    ResponseEntity<?> response = claimComponent.updateClaimStatus(payload);
+	    return response;
+	}
+	
 }

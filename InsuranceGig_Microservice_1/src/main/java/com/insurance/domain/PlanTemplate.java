@@ -16,7 +16,7 @@ public class PlanTemplate {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private Long planTemplateId;
+	private Long id;
 	
 	private String name;
 	
@@ -34,10 +34,10 @@ public class PlanTemplate {
 		super();
 	}
 
-	public PlanTemplate(Long planTemplateId, String name, Double basePremium, Integer deductible, String description,
+	public PlanTemplate(Long id, String name, Double basePremium, Integer deductible, String description,
 			List<Plan> plans) {
 		super();
-		this.planTemplateId = planTemplateId;
+		this.id = id;
 		this.name = name;
 		this.basePremium = basePremium;
 		this.deductible = deductible;
@@ -46,11 +46,11 @@ public class PlanTemplate {
 	}
 
 	public Long getPlanTemplateId() {
-		return planTemplateId;
+		return id;
 	}
 
-	public void setPlanTemplateId(Long planTemplateId) {
-		this.planTemplateId = planTemplateId;
+	public void setPlanTemplateId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
